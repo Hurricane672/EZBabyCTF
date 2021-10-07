@@ -10,11 +10,13 @@
 
  仿照开源项目[ctfd](https://github.com/CTFd/CTFd)，利用HTML、JS、CSS、PHP、MySQL技术栈开发一个**全新的**能完成CTF日常练习基本功能的网站。经本组成员讨论研究决定要实现的功能包括但不限于：
 
--   普通用户：登录、登出、注册；查看并查找团队、可以选择加入的团队；查看团队计分板；查看题目、下载附件、提交FLAG；查看团队邀请录用信息；给管理员留言
--   队长：在普通用户的基础上可以创建解散战队、对战队成员进行管理包括邀请新成员、删除无关成员
--   管理员：在普通用户的基础上可以创建题目、修改创建过的题目信息
+-   普通用户：登录(signin.html)、登出(signout.html)、注册(signup.html)；查看并查找团队、可以选择加入的团队(teams.html)；查看团队计分板(scoreboard.html)；查看题目、下载附件、提交FLAG(challenges.html)；查看团队邀请录用信息(notifications.html)；给管理员留言(message.html)；修改密码(settings.html)
+-   队长：在普通用户的基础上可以创建解散战队、对战队成员进行管理包括邀请新成员、删除无关成员(team.html)；修改密码(settings.html)
+-   管理员：在普通用户的基础上可以创建题目(add.html)、修改创建过的题目信息(edit.html)
 
 拟在此基础上添加WP展示和题目讨论功能，目前尚未形成一致意见。
+
+ [演示文稿1.pdf](..\演示文稿1.pdf) 
 
 ## 2. 项目详细设计
 
@@ -35,10 +37,9 @@ EZBabyCTF:.
 │  signup.html
 │  team.html
 │  teams.html
-│
-└─admin
-        add.html
-        edit.html
+│  admin
+	└─	|  add.html
+        |  edit.html
 ```
 
 ## 2.2 数据库结构
