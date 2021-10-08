@@ -27,9 +27,11 @@
 ``` text
 EZBabyCTF:.
 │  challenges.html
+│  ezbabyctf逻辑.pptx
 │  index.html
 │  message.html
 │  notifications.html
+│  README.md
 │  scoreboard.html
 │  settings.html
 │  signin.html
@@ -37,9 +39,11 @@ EZBabyCTF:.
 │  signup.html
 │  team.html
 │  teams.html
-│  admin
-	└─	|  add.html
-        |  edit.html
+│  各用户所拥有的功能.pdf
+│
+└─admin
+        add.html
+        edit.html
 ```
 
 ## 2.2 数据库结构
