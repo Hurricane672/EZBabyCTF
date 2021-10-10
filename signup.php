@@ -1,3 +1,4 @@
 <?php
-echo 1;
+echo $_POST["name"]."</br>";
+echo $_POST["password"]."</br>";
 ?>
