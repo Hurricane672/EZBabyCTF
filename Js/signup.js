@@ -4,9 +4,10 @@
 
  }
 
- function SubmitCheck() {
+ function Submitname() {
      var xmlhttp;
-     var uname = $(".SignupUser")
+     var uname = $("#Uname").val();
+     console.log(uname);
      var P2 = $(".SignupP");
      if (window.XMLHttpRequest) {
          xmlhttp = new XMLHttpRequest();
@@ -25,6 +26,7 @@
              }
          }
      }
-     xmlhttp.open("GET", uname, true);
-     xmlhttp.send();
+     xmlhttp.open("GET", "signup.php?flag=1&" + uname, true);
+     xmlhttp.
+     xmlhttp.send("flag=1" + uname);
  }

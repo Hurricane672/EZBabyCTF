@@ -1,84 +1,94 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EZBabyCTF注册</title>
-  <script src="Js/jQuery.js"></script>
-</head>
-
-<body>
-  <div>注册</div>
-  <div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EZBabyCTF注册</title>
+    <script src="Js/jQuery.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+  </head>
+  <body>
+    <div>注册</div>
     <div>
-      <form action="signup.php" name="signup" type="POST">
-        <div class="SignupUser">
-          <div>用户名/Username</div>
-          <input type="text" id="Uname" name="name" value="" onblur="Submitname()" required />
-        </div>
-        <div class="SignupPw">
-          <div>密码/Password</div>
-          <input type="password" id="P1" value="" required />
-        </div>
-        <div class="SignupP">
-          <div>确认密码/Confirm Password</div>
-          <input type="password" id="P2" onblur="Fcheck()" name="password" value="" required />
-        </div>
-        <div id="pal" style="display: none">两次密码输入不一致！</div>
-        <div><input type="submit" value="确定" /></div>
-      </form>
+      <div>
+        <form action="signup.php" name="signup" type="POST"/>
+          <div class="SignupUser">
+            <div>用户名/Username</div>
+            <input
+              type="text"
+              id="Uname"
+              name="name"
+              value=""
+              onblur="Submitname()"
+              required
+            />
+          </div>
+          <div class="SignupPw">
+            <div>密码/Password</div>
+            <input type="password" id="P1" value="" required />
+          </div>
+          <div class="SignupP">
+            <div>确认密码/Confirm Password</div>
+            <input
+              type="password"
+              id="P2"
+              onblur="Fcheck()"
+              name="password"
+              value=""
+              required
+            />
+          </div>
+          <div id="pal" style="display: none">两次密码输入不一致！</div>
+          <div><input type="submit" value="确定" onclick="encode()" /></div>
+        </form>
+      </div>
     </div>
-  </div>
-  <script>
-    function Fcheck() {
-      var P1 = document.getElementById("P1");
-      var P2 = document.getElementById("P2");
-      console.log(P1.value);
-      console.log(P2.value);
-
-      if (P1.value == P2.value) {
-        $("#pal").attr("style", "display: none;");
-        console.log($("#pal"));
+    <script>
+      function Fcheck() {
+        var P1 = document.getElementById("P1");
+        var P2 = document.getElementById("P2");
         console.log(P1.value);
         console.log(P2.value);
-      }
-      if (P1.value != P2.value) {
-        $("#pal").attr("style", "display: block;");
-        console.log($("#pal"));
-      }
-    }
-    function Submitname() {
-      var xmlhttp;
-      if ($("#Uname").val()) {
-        var uname = "" + $("#Uname").val();
-      } else {
-        return;
-      }
-      console.log(uname);
-      var P2 = $(".SignupP");
-      if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-      } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          if (xmlhttp.responseText === "false") {
-            window.alert("用户名已被占用!");
-            $("#Uname").value="";
-          }
-        }
-      };
-      xmlhttp.open("GET", "signup.php?flag=1&name=" + uname, true);
-      xmlhttp.send();
-    }
-    function encode() {
-      var P2 = document.getElementById("P2");
-      P2.value = toMD5(P2.value);
-    }
-  </script>
-</body>
 
+        if (P1.value == P2.value) {
+          $("#pal").attr("style", "display: none;");
+        }
+        if (P1.value != P2.value) {
+          $("#pal").attr("style", "display: block;");
+        }
+      }
+      function Submitname() {
+        var xmlhttp;
+        if ($("#Uname").val()) {
+          var uname = "" + $("#Uname").val();
+        } else {
+          return;
+        }
+        console.log(uname);
+        var P2 = $(".SignupP");
+        if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.responseText == "false") {
+              window.alert("用户名已被占用!");
+              $("#Uname").value = "";
+            }
+          } else {
+            window.alert("error:1");
+          }
+        };
+        xmlhttp.open("GET", "signup.php?flag=1&name=" + uname, true);
+        xmlhttp.send();
+      }
+      function encode() {
+        var P2 = document.getElementById("P2");
+        P2.value = md5(P2.value);
+      }
+    </script>
+  </body>
 </html>

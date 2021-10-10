@@ -1,4 +1,9 @@
 <?php
+<<<<<<< HEAD
+if(null!==($_GET["name"])&&null!==($_GET["flag"]))
+    echo $_GET["name"];
+
+=======
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -44,5 +49,11 @@ else{
     // echo $_POST["name"]."</br>";
     // echo $_POST["password"]."</br>";
 }
+<<<<<<< HEAD
 
+=======
+echo $_POST["name"]."</br>";
+echo $_POST["password"]."</br>";
+>>>>>>> 0b17790f0e18367f74ef3c4518454169ef4cfdec
+>>>>>>> 8daa2e76cb6e2a0c5bd642fd11039847e60d46e5
 ?>
