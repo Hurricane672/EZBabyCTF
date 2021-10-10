@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `done`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `done` (
-  `id` varchar(10) NOT NULL,
+  `id` varchar(32) NOT NULL,
   `challenge` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,7 +144,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` varchar(10) NOT NULL,
+  `id` varchar(32) NOT NULL,
   `name` varchar(20) NOT NULL,
   `team` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL
