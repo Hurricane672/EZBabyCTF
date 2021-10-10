@@ -1,7 +1,5 @@
 <?php
-if(isset($_POST["name"]&&)){
+if(null!==($_GET["name"])&&null!==($_GET["flag"]))
+    echo $_GET["name"];
 
-}
-echo $_POST["name"]."</br>";
-echo $_POST["password"]."</br>";
 ?>
