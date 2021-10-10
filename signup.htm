@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EZBabyCTF注册</title>
+    <script src="Js/signup.js"></script>
+    <script src="Js/jQuery.js"></script>
+  </head>
+  <body>
+    <script>
+      function Fcheck() {
+        var P1 = $(".SignupPw");
+        var P2 = $(".SignupP");
+        if (P1 == P2) {
+          return true;
+        } else {
+          var alat = document.createElement("div");
+          alat.innerText = "两次密码输入不一致";
+          P2.append(alat);
+        }
+      }
+    </script>
+    <div>注册</div>
+    <div>
+      <div>
+        <form action="#" type="POST" onsubmit="return SubmitCheck()">
+          <div class="SignupUser">
+            <div>用户名/Username</div>
+            <input type="text" name="name" />
+          </div>
+          <div class="SignupPw">
+            <div>密码/Password</div>
+            <input type="password" />
+          </div>
+          <div class="SignupP">
+            <div>确认密码/Confirm Password</div>
+            <input type="password" onblur="Fcheck()" name="password" />
+          </div>
+          <div><input type="submit" value="确定" /></div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
