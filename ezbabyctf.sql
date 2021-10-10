@@ -147,7 +147,8 @@ CREATE TABLE `users` (
   `id` varchar(32) NOT NULL,
   `name` varchar(20) NOT NULL,
   `team` varchar(100) NOT NULL,
-  `password` varchar(32) NOT NULL
+  `password` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
