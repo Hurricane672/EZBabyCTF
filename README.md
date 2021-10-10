@@ -299,3 +299,26 @@ UNLOCK TABLES;
 
 ```
 
+```text
+Create Virtul Host directory......
+set permissions of Virtual Host directory......
+You select the exist rewrite rule:/usr/local/nginx/conf/rewrite/other.conf
+Test Nginx configure file......
+nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
+Reload Nginx......
+Reload service php-fpm  done
+Add database Sucessfully.
+================================================
+Virtualhost infomation:
+Your domain: www.ezbabyctf.org
+Home Directory: /home/wwwroot/www.ezbabyctf.org
+Rewrite: other
+Enable log: yes
+Database username: ezbabyctf
+Database userpassword: ezbabyctf
+Database Name: ezbabyctf
+Create ftp account: no
+================================================
+```
+
