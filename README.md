@@ -320,5 +320,7 @@ Database userpassword: ezbabyctf
 Database Name: ezbabyctf
 Create ftp account: no
 ================================================
+ubuntu password: 20020221
+mysql root password : null
 ```
 
