@@ -1,14 +1,148 @@
 <!DOCTYPE html>
-<html>
-<body>
-<form method="POST" action="/signup.php?flag=1">
-Name:<br>
-<input type="text" name="name" placeholder="Name">
-<br>
-Password:<br>
-<input type="text" name="password" placeholder="Password">
-<br><br>
-<input type="submit" value="Submit">
-</form> 
-</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/primer.css" rel="stylesheet" />
+    <title>EZBabyCTF</title>
+    <script src="JS/axios.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="Js/tpef.js"></script>
+    <script src="JS/mask.js"></script>
+    <style>
+      body {
+        background: url("img/-bg.jpg") no-repeat center top fixed;
+        position: relative;
+      }
+
+      #Head {
+        font-size: 30px;
+        color: #fff;
+      }
+      .marsk-container {
+        position: absolute;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        display: none;
+      }
+      .popwindow {
+        position: fixed;
+        margin: 17vh auto;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        max-height: 80vh;
+        max-width: 90vw;
+        width: 600px;
+        overflow: auto;
+      }
+      .type-js {
+        margin: 2px 20px;
+        background: rgba(181, 181, 181, 0.3);
+        height: 100px;
+        width: 558px;
+      }
+      .frame-example {
+        min-height: 500px;
+      }
+      .Header-link:hover {
+        cursor: pointer;
+      }
+      #Head:hover {
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Header" style="background-color: rgba(0, 0, 0, 0.726)">
+      <div class="Header-item m-auto">
+        <span id="Head">EZBabyCTF</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" onclick="signp()">注册</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" onclick="">登录</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" onclick="">战队</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" onclick="">排行榜</span>
+      </div>
+    </div>
+    <div class="marsk-container"></div>
+    <div class="popwindow">
+      <div
+        class="Box Box--overlay d-flex flex-column anim-fade-in fast"
+        style="width: 600px; height: 500px"
+      >
+        <div class="Box-header">
+          <button
+            class="Box-btn-octicon btn-octicon float-right"
+            type="button"
+            onclick="closesign()"
+          >
+            <!-- <%= octicon "x" %> -->
+            <svg
+              class="octicon octicon-x"
+              viewBox="0 0 12 16"
+              version="1.1"
+              width="12"
+              height="16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"
+              ></path>
+            </svg>
+          </button>
+          <h3 class="Box-title">EZBabyCTF注册</h3>
+        </div>
+        <div class="overflow-auto">
+          <div class="Box-body overflow-auto type-js">
+            <p class="text-js">
+              The quick brown fox jumps over the lazy dog and feels as if he
+              were in the seventh heaven of typography together with Hermann
+              Zapf, the most famous artist of the...
+            </p>
+          </div>
+        </div>
+        <div class="Box-footer">
+          <button type="button" class="btn btn-block" data-close-dialog>
+            Ok
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // $(document).ready(function () {
+      //   // Now to start autoTyping just call the autoType function with the
+      //   // class of outer div
+      //   // The second paramter is the speed between each letter is typed.
+      //
+      // });
+      $(document).ready(function () {
+        $(".popwindow").hide();
+      });
+      function signp() {
+        $(".popwindow").show();
+        autoType(".type-js", 100);
+      }
+      function closesign() {
+        $(".popwindow").hide();
+      }
+    </script>
+  </body>
 </html>

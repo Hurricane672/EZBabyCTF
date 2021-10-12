@@ -4,18 +4,50 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/basic.css">
     <title>EZBabyCTF注册</title>
     <script src="Js/jQuery.js"></script>
     <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <style>
+        .flotfonts{
+            position: absolute;
+            background-color: aliceblue;
+            
+
+        }
+        .flotfont1{
+            top: -16px;
+            left: 36px;
+        }
+        .flotfont2{
+            top: 81px;
+            left: 36px;
+        } .flotfont3{
+            top: 174px;
+            left: 36px;
+        }
+
+        input{
+            display: block;
+            border: 2px solid;
+            border-radius: 5px;
+        }
+        .intext{
+            width: 486px;
+            height: 71px;
+            margin: 20px;
+        }
+    </style>
   </head>
   <body>
     <div>注册</div>
-    <div>
-      <div>
+    <div >
+      <div class="shade">
         <form action="signup.php" name="signup" type="POST"/>
-          <div class="SignupUser">
-            <div>用户名/Username</div>
+        <div style="position: relative;"><div class="SignupUser" >
+            <div class="flotfonts flotfont1">用户名/Username</div>
             <input
+            class="intext"
               type="text"
               id="Uname"
               name="name"
@@ -25,22 +57,24 @@
             />
           </div>
           <div class="SignupPw">
-            <div>密码/Password</div>
-            <input type="password" id="P1" value="" required />
+            <div class="flotfonts flotfont2">密码/Password</div>
+            <input type="password" class="intext" id="P1" value="" required />
           </div>
           <div class="SignupP">
-            <div>确认密码/Confirm Password</div>
+            <div class="flotfonts flotfont3">确认密码/Confirm Password</div>
             <input
               type="password"
               id="P2"
               onblur="Fcheck()"
               name="password"
               value=""
+              class="intext"
               required
             />
           </div>
           <div id="pal" style="display: none">两次密码输入不一致！</div>
-          <div><input type="submit" value="确定" onclick="encode()" /></div>
+          <div><input type="submit" value="确定" onclick="encode()" /></div></div>
+          
         </form>
       </div>
     </div>
