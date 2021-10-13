@@ -25,8 +25,6 @@ else{
         $password = $_GET["password"];
         $id = md5($name);
         $team = "__NONE__";
-        // $s1 = "select * from ".$tb." where name=".$name;
-        // echo $s1;
         $s2 = "insert into ".$tb." (`id`,`name`,`team`,`password`) values (\"".$id."\",\"".$name."\",\"".$team."\",\"".$password."\");";
         $conn->query($s2);
         // mysqli_query($conn,$s2);
@@ -42,5 +40,5 @@ else{
         die("Invalid call.");
     }
 }
-
 ?>
+//http://192.168.64.129/signup.php?name=1&password=1
