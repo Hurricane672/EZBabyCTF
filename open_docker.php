@@ -1,19 +1,27 @@
 <?php
-echo $_POST["challeng_name"];
+echo $_POST["type_name"];
+echo "<br>";
+echo $_POST["challenge_name"];
+echo "<br>";
 
-$user = "ezbabyctf";
-$db = "ezbabyctf";
-$tb = "challenges";
-$conn = new mysqli("localhost","root");
-if($coon->connect_error){
-    die("Connection faild.".$coon->connect_error);
+$path="./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"] . "/docker-compose.yml";
+echo $path;
+echo "<br>";
+$content = file_get_contents($path);
+echo $content;
+echo "<br>";
+$content = str_replace('- "3000:3000"','- "3001:3000"',$content);
+echo $content;
+echo "<br>";
+if(!file_put_contents($path,$content))
+{
+    echo "error";
 }
-else{
-    
-}
 
+$content = file_get_contents($path);
+echo $content;
+echo "<br>";
+echo shell_exec("whoami");
 
-
-$conn->close();
 
 ?>
