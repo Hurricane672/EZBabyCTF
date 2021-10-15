@@ -94,7 +94,6 @@
             type="button"
             onclick="closesign()"
           >
-            <!-- <%= octicon "x" %> -->
             <svg
               class="octicon octicon-x"
               viewBox="0 0 12 16"
@@ -136,6 +135,7 @@
         $(".popwindow").hide();
 
         $(".push").click(function push() {
+          $(".push").attr("disabled", "disabled");
           var app = $("#signupipt").val();
           $(".text-js").append("<p>>" + app + "<p/>");
           flag++;
@@ -145,7 +145,7 @@
             var ret = director(app, flag);
             nee.append("<p class='text-js'>>" + ret[0] + "<p/>");
             flag = ret[1];
-            typing("#signupipt",4000)
+            typing("#signupipt", 4000);
           }, 1000);
         });
       });
@@ -163,7 +163,10 @@
         setTimeout(() => {
           $(".push").removeAttr("disabled");
           $(ipt).keyup(function (event) {
-            if (event.keyCode == 13) {
+            if (
+              event.keyCode == 13 &&
+              "disabled" != $(".push").attr("disabled")
+            ) {
               $(".push").trigger("click");
             }
           });
