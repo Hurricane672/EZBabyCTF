@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/primer.css" rel="stylesheet" />
     <title>EZBabyCTF</title>
-    <script src="JS/axios.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <script src="Js/core.js"></script>
     <script src="Js/tpef.js"></script>
     <script src="JS/mask.js"></script>
     <style>
       body {
-        background: url("img/-bg.jpg") no-repeat center top fixed;
+        background: url("img/-bg.jpg") repeat center top fixed;
         position: relative;
       }
 
@@ -110,38 +110,64 @@
           </button>
           <h3 class="Box-title">EZBabyCTF注册</h3>
         </div>
-        <div class="overflow-auto">
-          <div class="Box-body overflow-auto type-js">
+        <div class="overflow-hidden" style="height: 50vh">
+          <div class="Box-body overflow-y-auto type-js" style="height: 94%">
             <p class="text-js">
-              The quick brown fox jumps over the lazy dog and feels as if he
-              were in the seventh heaven of typography together with Hermann
-              Zapf, the most famous artist of the...
+              >嗨，你好(鞠躬)。欢迎来到EZBabyCTF！下面请介绍一下你自己！输入您的用户名：
             </p>
+            <p></p>
           </div>
         </div>
         <div class="Box-footer">
-          <button type="button" class="btn btn-block" data-close-dialog>
-            Ok
-          </button>
+          <input
+            type="text"
+            class="form-control"
+            style="width: 95%; margin: 2vh"
+            id="signupipt"
+            placeholder="……"
+          />
+          <button type="button" class="btn btn-block push">确定</button>
         </div>
       </div>
     </div>
     <script>
-      // $(document).ready(function () {
-      //   // Now to start autoTyping just call the autoType function with the
-      //   // class of outer div
-      //   // The second paramter is the speed between each letter is typed.
-      //
-      // });
       $(document).ready(function () {
+        var flag = 0;
         $(".popwindow").hide();
+
+        $(".push").click(function push() {
+          var app = $("#signupipt").val();
+          $(".text-js").append("<p>>" + app + "<p/>");
+          flag++;
+          setTimeout(function () {
+            var nee = $(".text-js");
+            $(".text-js").removeAttr("class");
+            var ret = director(app, flag);
+            nee.append("<p class='text-js'>>" + ret[0] + "<p/>");
+            flag = ret[1];
+            typing("#signupipt",4000)
+          }, 1000);
+        });
       });
       function signp() {
         $(".popwindow").show();
-        autoType(".type-js", 100);
+        typing("#signupipt", 5000);
       }
       function closesign() {
         $(".popwindow").hide();
+        $(".marsk-container").hide();
+      }
+      function typing(ipt, time) {
+        $(".push").attr("disabled", "disabled");
+        autoType(".type-js", 50);
+        setTimeout(() => {
+          $(".push").removeAttr("disabled");
+          $(ipt).keyup(function (event) {
+            if (event.keyCode == 13) {
+              $(".push").trigger("click");
+            }
+          });
+        }, time);
       }
     </script>
   </body>
