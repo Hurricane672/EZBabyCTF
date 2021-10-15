@@ -5,15 +5,14 @@ function director(val, flag) {
             return re;
             break;
         case 1:
-            var xmlhttp;
             if (val != 0) {
                 var uname = "" + val;
             } else {
                 flag--;
-                var re = ["你叫了个寂寞，重来！", 0];
+                var re = ["你叫了个寂寞……这样让人家这么称呼你呀？重来！", 0];
                 return re;
             }
-            console.log(uname);
+            
             $.ajax({
                 url: "signup.php",
                 data: {
@@ -26,7 +25,7 @@ function director(val, flag) {
                         var re = ["你来晚了，这个用户名已经被注册了哈哈哈哈！", 0];
                         return re;
                     } else {
-                        var re = ["哎呦不错呦，我很喜欢这个名字owo", 1];
+                        var re = ["哎呦不错呦，我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
                         return re;
                     }
                 },
@@ -56,6 +55,9 @@ function director(val, flag) {
             // };
             // xmlhttp.open("GET", "signup.php?flag=1&name=" + uname, true);
             // xmlhttp.send();
+            break;
+        case 2:
+
             break;
         default:
             break;
