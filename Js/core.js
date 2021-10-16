@@ -12,7 +12,7 @@ function director(val, flag) {
                 var re = ["你叫了个寂寞……这样让人家这么称呼你呀？重来！", 0];
                 return re;
             }
-            
+
             $.ajax({
                 url: "signup.php",
                 data: {
@@ -64,6 +64,21 @@ function director(val, flag) {
     }
 }
 
-function Submitname() {
-
+function typing(ipt, time) {
+    $(".push").attr("disabled", "disabled");
+    autoType(
+        "#" + $(ipt).parent().parent().find(".type-js").attr("id"),
+        50
+    );
+    setTimeout(() => {
+        $(".push").removeAttr("disabled");
+        $(ipt).keyup(function (event) {
+            if (
+                event.keyCode == 13 &&
+                "disabled" != $(".push").attr("disabled")
+            ) {
+                $(".push").trigger("click");
+            }
+        });
+    }, time);
 }
