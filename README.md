@@ -119,7 +119,8 @@ mysql> desc users;
 2021年10月7日更新
 
 ----
-
+lnmp中php.ini位置：vim /usr/local/php/etc/php.ini
+删除disable_function中的shell_exec使php可以执行系统命令
 
 
 
