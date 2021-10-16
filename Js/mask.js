@@ -5,5 +5,6 @@ $(document).ready(function () {
     $(".marsk-container").click(function () {
         $(".marsk-container").hide();
         $(".popwindow").hide();
+        $(".pophint").hide()
     })
 })

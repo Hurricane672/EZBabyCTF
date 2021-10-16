@@ -9,10 +9,10 @@ function director(val, flag) {
                 var uname = "" + val;
             } else {
                 flag--;
-                var re = ["你叫了个寂寞……这样让人家这么称呼你呀？重来！", 0];
+                var re = ["(•́へ•́ ╬)你叫了个寂寞……这样让人家这么称呼你呀", 0];
                 return re;
             }
-            
+
             $.ajax({
                 url: "signup.php",
                 data: {
@@ -25,7 +25,7 @@ function director(val, flag) {
                         var re = ["你来晚了，这个用户名已经被注册了哈哈哈哈！", 0];
                         return re;
                     } else {
-                        var re = ["哎呦不错呦，我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
+                        var re = ["(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
                         return re;
                     }
                 },
@@ -57,13 +57,69 @@ function director(val, flag) {
             // xmlhttp.send();
             break;
         case 2:
+            if (val != 0) {
+                var uname = "" + val;
+            } else {
+                var re = ["你真的是来搞安全的嘛？空密码……这也太不安全了！好好反思下！<(｀^′)>", 1];
+                return re;
+            }
 
+            break;
+        case 3:
+            if (val != 0) {
+                var uname = "" + val;
+            } else {
+                var re = ["空空又空空，老调戏人家有什么意思(´•ω•̥`)", 2];
+                return re;
+            }
+            break;
+        case 10:
+            var re = ["?李在赣神魔，不要瞎搞啊人家会坏掉的qwq", 10];
+            return re;
+            break;
+        case 11:
+            if (val != 0) {
+                var uname = "" + val;
+            } else {
+                var re = ["你是故意找茬是不是啊<(｀^′)>", 10];
+                return re;
+            }
+            break;
+        case 12:
+            if (val != 0) {
+                var uname = "" + val;
+            } else {
+                var re = ["(๑•̌.•̑๑)ˀ̣ˀ̣", 11];
+                return re;
+            }
             break;
         default:
             break;
     }
 }
 
-function Submitname() {
+function submitFlag(submit) {
 
+    $(".pophint").show();
+    $(".marsk-container").show();
+
+}
+
+function typing(ipt, time) {
+    $(".push").attr("disabled", "disabled");
+    autoType(
+        "#" + $(ipt).parent().parent().find(".type-js").attr("id"),
+        50
+    );
+    setTimeout(() => {
+        $(".push").removeAttr("disabled");
+        $(ipt).keypress(function (event) {
+            if (
+                event.keyCode == 13 &&
+                "disabled" != $(ipt).parent().find(".push").attr("disabled")
+            ) {
+                $(ipt).parent().find(".push").trigger("click");
+            }
+        });
+    }, time);
 }
