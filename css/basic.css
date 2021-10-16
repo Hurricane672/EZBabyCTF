@@ -1,0 +1,115 @@
+body {
+  background: url("../img/-bg.jpg") repeat center top fixed;
+  position: relative;
+  font-family: url("../fonts/方正小标宋简体.ttf"),
+    url("../fonts/UbuntuMono-BI.ttf"), Arial, sans-serif;
+}
+
+#Head {
+  font-size: 30px;
+  color: #fff;
+}
+#challengefather {
+  position: absolute;
+  top: 180%;
+  left: 7%;
+  right: 7%;
+  color: #fff;
+}
+.enlarge {
+  background-color: var(--color-scale-gray-9);
+  display: inline-block;
+  width: 400px;
+  height: 160px;
+}
+.enlarge:hover {
+  border: 1px solid #333;
+}
+.marsk-container {
+  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: none;
+}
+.popwindow {
+  position: fixed;
+  margin: 17vh auto;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  max-height: 80vh;
+  max-width: 90vw;
+  width: 600px;
+  overflow: auto;
+  display: none;
+}
+.pophint {
+  position: fixed;
+  margin: 17vh auto;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  max-height: 80vh;
+  max-width: 90vw;
+  display: none;
+}
+.type-js {
+  margin: 2px 20px;
+  background: rgba(181, 181, 181, 0.3);
+  height: 100px;
+  width: 558px;
+}
+.frame-example {
+  min-height: 500px;
+}
+.Header-link:hover {
+  cursor: pointer;
+}
+#Head:hover {
+  cursor: default;
+}
+.settingc {
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+.challengename {
+  position: absolute;
+  top: 8%;
+  left: 6%;
+}
+.submittingbtn {
+  position: absolute;
+  top: 74%;
+  left: 83%;
+}
+.submitflag {
+  width: 80%;
+  position: absolute;
+  top: 70%;
+  left: 10%;
+}
+.challengedisc {
+  font-size: 12px;
+  width: 62%;
+  height: 33%;
+  color: #7b7b77;
+  overflow: hidden;
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  text-align: left;
+  white-space: normal;
+}
+.score {
+  position: absolute;
+  top: 22%;
+  right: 12%;
+}

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/primer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/basic.css" />
     <title>EZBabyCTF</title>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -14,111 +15,7 @@
     <script src="Js/core.js"></script>
     <script src="Js/tpef.js"></script>
     <script src="JS/mask.js"></script>
-    <style>
-      body {
-        background: url("img/-bg.jpg") repeat center top fixed;
-        position: relative;
-        font-family: url("fonts/方正小标宋简体.ttf"),
-          url("fonts/UbuntuMono-BI.ttf"), Arial, sans-serif;
-      }
-
-      #Head {
-        font-size: 30px;
-        color: #fff;
-      }
-      #challengefather {
-        position: absolute;
-        top: 180%;
-        left: 7%;
-        right: 7%;
-        color: #fff;
-      }
-      .enlarge {
-        background-color: var(--color-scale-gray-9);
-        display: inline-block;
-        width: 400px;
-        height: 160px;
-      }
-      .enlarge:hover {
-        border: 1px solid #333;
-      }
-      .marsk-container {
-        position: absolute;
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0px;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 10;
-        display: none;
-      }
-      .popwindow {
-        position: fixed;
-        margin: 17vh auto;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
-        max-height: 80vh;
-        max-width: 90vw;
-        width: 600px;
-        overflow: auto;
-      }
-      .type-js {
-        margin: 2px 20px;
-        background: rgba(181, 181, 181, 0.3);
-        height: 100px;
-        width: 558px;
-      }
-      .frame-example {
-        min-height: 500px;
-      }
-      .Header-link:hover {
-        cursor: pointer;
-      }
-      #Head:hover {
-        cursor: default;
-      }
-      .settingc {
-        position: absolute;
-        top: 5%;
-        right: 3%;
-      }
-      .challengename {
-        position: absolute;
-        top: 8%;
-        left: 6%;
-      }
-      .submittingbtn {
-        position: absolute;
-        top: 74%;
-        left: 83%;
-      }
-      .submitflag {
-        width: 80%;
-        position: absolute;
-        top: 70%;
-        left: 10%;
-      }
-      .challengedisc {
-        font-size: 12px;
-        width: 62%;
-        height: 33%;
-        color: #7b7b77;
-        overflow: hidden;
-        position: absolute;
-        top: 25%;
-        left: 10%;
-        text-align: left;
-        white-space: normal;
-      }
-      .score {
-        position: absolute;
-        top: 22%;
-        right: 12%;
-      }
-    </style>
+    <script src="Js/load.js"></script>
   </head>
   <body>
     <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
@@ -126,7 +23,7 @@
         <span id="Head">EZBabyCTF</span>
       </div>
       <div class="Header-item m-3">
-        <span class="Header-link" onclick="">通知 </span>
+        <span class="Header-link" onclick="notif()">通知 </span>
       </div>
       <div class="Header-item m-3">
         <span class="Header-link" onclick="signp()">注册</span>
@@ -135,7 +32,7 @@
         <span class="Header-link" onclick="signi()">登录</span>
       </div>
       <div class="Header-item m-3">
-        <span class="Header-link" onclick="">战队</span>
+        <span class="Header-link" onclick="team()">战队</span>
       </div>
       <div class="Header-item m-3">
         <span class="Header-link" onclick="">排行榜</span>
@@ -143,8 +40,29 @@
     </div>
     <div class="marsk-container"></div>
 
+    <div class="p-1 pophint">
+      <div class="Toast Toast--success">
+        <span class="Toast-icon">
+          <!-- <%= octicon "check" %> -->
+          <svg
+            width="12"
+            height="16"
+            viewBox="0 0 12 16"
+            class="octicon octicon-check"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"
+            />
+          </svg>
+        </span>
+        <span class="Toast-content">太牛了！给你鼓掌👏👏</span>
+      </div>
+    </div>
+
     <div id="challengefather">
-      <div class="mt-3 p-5">
+      <div class="mt-3 p-5 anim-fade-in">
         <button
           class="btn-mktg btn-transparent enlarge m-2"
           type="button"
@@ -301,7 +219,6 @@
     <script>
       $(document).ready(function () {
         var flag = 0;
-        $(".popwindow").hide();
         $(".push").click(function push() {
           $(".push").attr("disabled", "disabled");
           if ($("#signin").css("display") == "none") {
@@ -314,7 +231,6 @@
           }
           var app = $(doing).val();
           var toappd = $(doing).parent().parent().find(".text-js");
-          console.log(toappd);
           toappd.append("<p>>" + app + "<p/>");
           flag++;
           setTimeout(function () {
@@ -324,6 +240,9 @@
             flag = ret[1];
             typing(doing, 4000);
           }, 1000);
+        });
+        $(".submittingbtn").click(function () {
+          submitFlag(1);
         });
       });
       function signp() {
@@ -338,6 +257,26 @@
         $(".popwindow").hide();
         $(".marsk-container").hide();
       }
+      function team() {
+        window.location.href = "team.html";
+      }
+      function notif() {
+        window.location.href = "notifications.html";
+      }
     </script>
+    <!-- var id = $(this).attr("id") + "ipt"; if ($("#" + id)) submitFlag($("#" +
+id).val()); -->
   </body>
 </html>
+<!-- flag状态：
+  0：注册初始状态
+  1：注册用户名
+  2：注册密码
+  3：确认密码
+  10：登录初始态
+  11：登录用户名
+  12：登录密码
+  100：登陆成功
+  101：登出
+  105：修改密码
+ -->
