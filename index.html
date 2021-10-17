@@ -8,8 +8,10 @@
   <link href="css/primer.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/basic.css" />
   <title>EZBabyCTF</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js">
+  </script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
   <script src="Js/core.js"></script>
   <script src="Js/tpef.js"></script>
   <script src="Js/mask.js"></script>
@@ -158,11 +160,15 @@
         var toappd = $(doing).parent().parent().find(".text-js");
         toappd.append("<p>>" + app + "<p/>");
         flag++;
-        var ret = director(app, flag);
+        var ret = {
+          content: "",
+          flag: 0
+        };
         setTimeout(function () {
+          director(app, flag, ret);
           toappd.removeAttr("class");
-          toappd.append("<p class='text-js'>>" + ret[0] + "<p/>");
-          flag = ret[1];
+          toappd.append("<p class='text-js'>>" + ret.content + "<p/>");
+          flag = ret.flag;
           typing(doing, 4000);
         }, 1000);
       });
@@ -188,7 +194,8 @@
     function notif() {
       window.location.href = "notifications.html";
     }
-    
+
+
   </script>
   <!-- var id = $(this).attr("id") + "ipt"; if ($("#" + id)) submitFlag($("#" +
 id).val()); -->
