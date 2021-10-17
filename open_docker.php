@@ -33,36 +33,16 @@ if (!file_put_contents($path, $content)) {
 // $content = file_get_contents($path);
 // echo $content;
 // echo "<br>";
-$output=shell_exec("whoami");
-echo $output;
+// $output=shell_exec("whoami");
+// echo $output;
 
 // echo $_POST["type_name"];
 // echo "<br>";
 // echo $_POST["challenge_name"];
 // echo "<br>";
 
-$cmd1 = "cd ./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"];//正常
+$cmd1 = "cd ./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"] . "&& sudo docker-compose up -d";//正常
 echo $cmd1. "<br>";
-$output = shell_exec($cmd1);
-// shell_exec("ls");
-if (!$output) 
-{
-    echo "error1<br>";//无输出，不是错误
-}
-else
-{
-    echo $output;
-}
+$output=shell_exec($cmd1);
 
-
-$cmd2 = "docker-compose up -d";
-$output2 = shell_exec($cmd2);
-if (!$output2) 
-{
-    echo "error2";
-}
-else
-{
-    echo $output2;
-}
 ?>
