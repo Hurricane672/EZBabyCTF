@@ -7,15 +7,16 @@ function director(val, flag) {
         case 1:
             if (val != 0) {
                 var uname = "" + val;
+
             } else {
                 flag--;
                 var re = ["(•́へ•́ ╬)你叫了个寂寞……这样让人家这么称呼你呀", 0];
                 return re;
             }
-
             $.ajax({
                 url: "signup.php",
                 type: "GET",
+                async: false,
                 data: {
                     flag: "1",
                     name: uname
@@ -27,8 +28,8 @@ function director(val, flag) {
                         var re = ["你来晚了，这个用户名已经被注册了哈哈哈哈！", 0];
                         return re;
                     } else {
-                        var re = ["(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
-                        return re;
+                        var re1 = ["(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
+                        return re1;
                     }
                 },
                 error: function () {
@@ -36,27 +37,6 @@ function director(val, flag) {
                     return;
                 }
             })
-            // if (window.XMLHttpRequest) {
-            //     xmlhttp = new XMLHttpRequest();
-            // } else {
-            //     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            // }
-            // xmlhttp.onreadystatechange = function () {
-            //     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //         if (xmlhttp.responseText == "false") {
-            //             var re = ["你来晚了，这个用户名已经被注册了哈哈哈哈！", 0];
-            //             return re;
-            //         } else {
-            //             var re = ["哎呦不错呦，我很喜欢这个名字owo", 1];
-            //             return re;
-            //         }
-            //     } else {
-            //         var re = ["哔哔哔——你失联了qwq，快想办法回来，我会想你的！", 0];
-            //         return re;
-            //     }
-            // };
-            // xmlhttp.open("GET", "signup.php?flag=1&name=" + uname, true);
-            // xmlhttp.send();
             break;
         case 2:
             if (val != 0) {
