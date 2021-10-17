@@ -11,7 +11,7 @@ else{
     if(isset($_GET["flag"])&&isset($_GET["name"])){
         $name = $_GET["name"];
         mysqli_query($conn,"SET NAMES UTF8");
-        $s1 = "select * from ".$tb." where name=".$name;
+        $s1 = "select * from \"".$tb."\" where name=".$name;
         mysqli_query($conn,$s1);
         if(mysqli_affected_rows($conn)!=0){
             exit("false");
