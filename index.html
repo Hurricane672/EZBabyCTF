@@ -158,7 +158,7 @@
         var toappd = $(doing).parent().parent().find(".text-js");
         toappd.append("<p>>" + app + "<p/>");
         flag++;
-        var ret = director(app, flag);
+        ret = director(app, flag);
         setTimeout(function () {
           toappd.removeAttr("class");
           toappd.append("<p class='text-js'>>" + ret[0] + "<p/>");
