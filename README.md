@@ -46,7 +46,7 @@ EZBabyCTF:.
         edit.html
 ```
 
-## 2.2 数据库结构
+### 2.2 数据库结构
 
 ```mysql
 mysql> use ezbabyctf # 数据库名称
@@ -78,8 +78,8 @@ mysql> desc done;
 +-----------+-------------+------+-----+---------+-------+
 | Field     | Type        | Null | Key | Default | Extra |
 +-----------+-------------+------+-----+---------+-------+
-| id        | varchar(10) | NO   |     | NULL    |       | # 用户id用以标识用户身份
-| challenge | varchar(10) | NO   |     | NULL    |       | # 题目编号
+| id        | varchar(32) | NO   |     | NULL    |       | # 用户id用以标识用户身份
+| challenge | varchar(32) | NO   |     | NULL    |       | # 题目编号
 +-----------+-------------+------+-----+---------+-------+
 mysql> desc notifications;
 +---------+--------------+------+-----+---------+-------+
@@ -93,7 +93,7 @@ mysql> desc scoreboard;
 +-------+--------------+------+-----+---------+-------+
 | Field | Type         | Null | Key | Default | Extra |
 +-------+--------------+------+-----+---------+-------+
-| id    | int(11)      | NO   |     | NULL    |       | # 战队id
+| id    | varchar(32)  | NO   |     | NULL    |       | # 战队id
 | tname | varchar(100) | NO   |     | NULL    |       | # 战队名
 | score | int(11)      | NO   |     | NULL    |       | # 战队得分
 +-------+--------------+------+-----+---------+-------+
@@ -101,7 +101,7 @@ mysql> desc teams;
 +---------+--------------+------+-----+---------+----------------+
 | Field   | Type         | Null | Key | Default | Extra          |
 +---------+--------------+------+-----+---------+----------------+
-| id      | int(11)      | NO   | PRI | NULL    | auto_increment | # 战队id
+| id      | varchar(32)  | NO   | PRI | NULL    | auto_increment | # 战队id
 | tname   | varchar(100) | NO   |     | NULL    |                | # 战队名
 | captain | varchar(100) | NO   |     | NULL    |                | # 战队队长
 | active  | char(1)      | YES  |     | 1       |                | # 战队状态（是否激活）
@@ -110,7 +110,7 @@ mysql> desc users;
 +----------+--------------+------+-----+---------+-------+
 | Field    | Type         | Null | Key | Default | Extra |
 +----------+--------------+------+-----+---------+-------+
-| id       | varchar(10)  | NO   |     | NULL    |       | # 用户id
+| id       | varchar(32)  | NO   |     | NULL    |       | # 用户id
 | name     | varchar(20)  | NO   |     | NULL    |       | # 用户名
 | team     | varchar(100) | NO   |     | NULL    |       | # 用户所属战队
 | password | varchar(32)  | NO   |     | NULL    |       | # 用户密码以MD5方式存储
@@ -119,9 +119,8 @@ mysql> desc users;
 2021年10月7日更新
 
 ----
-lnmp中php.ini位置：vim /usr/local/php/etc/php.ini
-删除disable_function中的shell_exec使php可以执行系统命令
-
+### 2.3交互流程
+![2](attaches/2.jpg)
 
 
 ```mysql
