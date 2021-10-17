@@ -30,15 +30,9 @@ function director(val, flag, re) {
                         return;
 
                     } else {
-<<<<<<< HEAD
-                        //var re1 = ["(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w", 1];
-                        var re1 = "12343";
-                        return re1;
-=======
                         re.content = uname+"……(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w";
                         re.flag = 1;
                         return;
->>>>>>> 0960f97d10aa04e5ed78b2bb149ee82f50608e9d
                     }
                 },
                 error: function () {
