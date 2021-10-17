@@ -15,12 +15,14 @@ function director(val, flag) {
 
             $.ajax({
                 url: "signup.php",
+                type: "GET",
                 data: {
                     flag: "1",
                     name: uname
                 },
+                dataType: "text",
                 success: function (response) {
-
+                    console.log(response);
                     if (response == "false") {
                         var re = ["你来晚了，这个用户名已经被注册了哈哈哈哈！", 0];
                         return re;
@@ -29,7 +31,7 @@ function director(val, flag) {
                         return re;
                     }
                 },
-                error: function (data) {
+                error: function () {
                     window.alert("error: 1")
                     return;
                 }
@@ -104,6 +106,7 @@ function submitFlag(submit) {
     $(".marsk-container").show();
 
 }
+
 
 function typing(ipt, time) {
     $(".push").attr("disabled", "disabled");
