@@ -172,6 +172,10 @@
           flag = ret.flag;
           typing(doing, 4000);
         }, 1000);
+        $(doing).val("");
+        if (flag == 12) {
+          window.location.reload();
+        }
       });
       $(".submittingbtn").click(function () {
         submitFlag(1);

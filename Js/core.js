@@ -106,13 +106,27 @@ function director(val, flag, re) {
         case 11:
             if (val != 0) {
                 var uname = "" + val;
+                nam = uname;
+                re.content = uname + " 几秒不见甚是想念ww,密码？";
+                re.flag = 11;
             } else {
                 re.content = "你是故意找茬是不是啊<(｀^′)>";
                 re.flag = 10;
                 return;
             }
+
+            break;
+        case 12:
+            if (val != 0) {
+                var psswd = "" + val;
+                passwd = hex_md5(psswd);
+            } else {
+                re.content = "(๑•̌.•̑๑)ˀ̣ˀ̣";
+                re.flag = 11;
+                return;
+            }
             $.ajax({
-                url: "signup.php",
+                url: "signin.php",
                 type: "GET",
                 async: false,
                 data: {
@@ -121,8 +135,16 @@ function director(val, flag, re) {
                 },
                 success: function (response) {
                     console.log(response);
-                    
-                    
+                    if (response == "Wrong name or password.") {
+                        re.content = "哎呀，是你记错了还是我认错了？从用户名重新开始写吧";
+                        re.flag = 10;
+                        return;
+
+                    } else {
+                        re.content = nam + "wwww超级想念你";
+                        re.flag = 12;
+                        return;
+                    }
                     return;
                 },
                 error: function () {
@@ -130,15 +152,6 @@ function director(val, flag, re) {
                     return;
                 }
             })
-            break;
-        case 12:
-            if (val != 0) {
-                var uname = "" + val;
-            } else {
-                re.content = "(๑•̌.•̑๑)ˀ̣ˀ̣";
-                re.flag = 11;
-                return;
-            }
             break;
         default:
             return;
