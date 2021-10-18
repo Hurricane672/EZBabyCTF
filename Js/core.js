@@ -1,3 +1,5 @@
+
+var passwd = "";
 function director(val, flag, re) {
     switch (flag) {
         case 0:
@@ -30,7 +32,7 @@ function director(val, flag, re) {
                         return;
 
                     } else {
-                        re.content = uname+"……(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w";
+                        re.content = uname + "……(❀｣╹□╹)｣*･我很喜欢这个名字owo一定要记好自己的名字嗷！现在，给自己想一个密码吧w";
                         re.flag = 1;
                         return;
                     }
@@ -49,7 +51,13 @@ function director(val, flag, re) {
                 re.flag = 1;
                 return;
             }
+            var circle = ""
+            for (let i = 0; i < val.length; i++) {
+                circle += "*";
+            }
 
+            re.content = circle+"嗯……我眼睛花了？";
+            re.flag = 2;
             break;
         case 3:
             if (val != 0) {
