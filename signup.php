@@ -12,7 +12,6 @@ else{
         $name = $_GET["name"];
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where name=\"".$name."\"";
-        echo $s1;
         $conn->query($s1);
         if(mysqli_affected_rows($conn)!=0){
             exit("false");
@@ -28,11 +27,12 @@ else{
         $team = "__NONE__";
         $s2 = "insert into ".$tb." (`id`,`name`,`team`,`password`) values (\"".$id."\",\"".$name."\",\"".$team."\",\"".$password."\");";
         $conn->query($s2);
+        //echo $s2;
         // mysqli_query($conn,$s2);
         if(mysqli_affected_rows($conn)!=-1){
             echo "Successfully sign up!";
             setcookie("salt",$id.time());
-            header("Location:index.html");
+            //header("Location:index.html");
         }
         else{
             die("Tamper with the package is invalid!");
@@ -43,4 +43,3 @@ else{
     }
 }
 ?>
-//http://192.168.64.129/signup.php?name=1&password=1
