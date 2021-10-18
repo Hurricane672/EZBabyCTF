@@ -7,7 +7,7 @@
 // $s2 = preg_replace('/\d{1,}:\d{1,}/','200:200',$s1);
 // var_dump($s2);
 //echo shell_exec("cd ./challenges/Web/CandyShop;sudo docker-compose up -d;sudo docker-compose ps");
-$r = shell_exec("sudo cd ./challenges/Web/CandyShop&&sudo docker-compose up -d&&sudo docker-compose ps");
+$r = shell_exec("sudo cd ./challenges/Web/CandyShop&&sudo docker-compose up -d");
 echo $r?$r:"null";
 // array(1) { [0]=> string(10) "29699:3000" } Array
 // 29746:3000

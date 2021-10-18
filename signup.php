@@ -31,6 +31,7 @@ else{
         // mysqli_query($conn,$s2);
         if(mysqli_affected_rows($conn)!=-1){
             echo "Successfully sign up!";
+            setcookie("salt",$id.time());
             header("Location:index.html");
         }
         else{
