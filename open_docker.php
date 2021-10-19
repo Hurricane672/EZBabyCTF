@@ -12,5 +12,4 @@ $cmd1 = "cd ./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"
 $output=shell_exec($cmd1);
 
 echo "192.168.223.131:" . $Num;
-
 ?>
