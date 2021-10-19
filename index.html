@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="css/basic.css" />
   <title>EZBabyCTF</title>
   <script src="Js/md5.js"></script>
-  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js">
-  </script>
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
   <script src="Js/core.js"></script>
@@ -34,16 +34,16 @@
     <div class="Header-item m-3">
       <span class="Header-link" onclick="">排行榜</span>
     </div>
-    <div class="Header-item m-3">
+    <div class="Header-item m-3 logout">
       <span class="Header-link" onclick="signp()">注册</span>
     </div>
-    <div class="Header-item m-3">
+    <div class="Header-item m-3 logout">
       <span class="Header-link" onclick="signi()">登录</span>
     </div>
-    <div class="Header-item m-3">
+    <div class="Header-item m-3 logon">
       <span class="Header-link" onclick="chapas()">修改密码</span>
     </div>
-    <div class="Header-item m-3">
+    <div class="Header-item m-3 logon">
       <span class="Header-link" onclick="signo()">登出</span>
     </div>
   </div>
@@ -175,6 +175,7 @@
         $(".popwindow").hide();
         $(".pophint").hide()
       })
+
     })
     $(document).ready(function () {
       var flag = 0;
@@ -222,6 +223,19 @@
       $(".submittingbtn").click(function () {
         submitFlag(1);
       });
+
+      if ($.cookie("salt") != 0 && Number(code) <= now) {
+        var date = new Date();
+        var now = date.getTime();
+        var code = $.cookie("salt");
+        code = code.substring(32);
+        flag = 10;
+        $(".logon").show();
+
+      }
+      else {
+        $(".logout").show();
+      }
     });
     function signp() {
       $("#signup").show();

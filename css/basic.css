@@ -113,3 +113,10 @@ body {
   top: 22%;
   right: 12%;
 }
+
+.logon{
+  display: none;
+}
+.logout{
+  display: none;
+}
