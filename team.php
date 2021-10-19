@@ -54,7 +54,7 @@ else{
                 }
             }
 
-            var_dump(json_encode($result));
+            exit(json_encode($result));
         }
     }
     else{
