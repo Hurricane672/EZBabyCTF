@@ -17,7 +17,7 @@ if (($_FILES["file"]["type"] == "application/x-zip-compressed")&& ($_FILES["file
 		// echo "文件大小: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
 		// echo "文件临时存储的位置: " . $_FILES["file"]["tmp_name"] . "<br>";
 		$cmd="find ./ -name " . $_POST["type_name"];
-        $path=shell_exec($cmd) . "/" . $_FILES["file"]["name"];
+        $path=substr(shell_exec($cmd),0,-1) . "/" . $_FILES["file"]["name"];
 		
 		//$path路径中的空格删不掉！！！！！！？？？？？？？？？？
 		if (file_exists($path))
