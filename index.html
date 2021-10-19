@@ -8,6 +8,7 @@
   <link href="css/primer.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/basic.css" />
   <title>EZBabyCTF</title>
+  <script src="Js/md5.js"></script>
   <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js">
   </script>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -26,6 +27,13 @@
     <div class="Header-item m-3">
       <span class="Header-link" onclick="notif()">通知 </span>
     </div>
+
+    <div class="Header-item m-3">
+      <span class="Header-link" onclick="team()">战队</span>
+    </div>
+    <div class="Header-item m-3">
+      <span class="Header-link" onclick="">排行榜</span>
+    </div>
     <div class="Header-item m-3">
       <span class="Header-link" onclick="signp()">注册</span>
     </div>
@@ -33,10 +41,10 @@
       <span class="Header-link" onclick="signi()">登录</span>
     </div>
     <div class="Header-item m-3">
-      <span class="Header-link" onclick="team()">战队</span>
+      <span class="Header-link" onclick="chapas()">修改密码</span>
     </div>
     <div class="Header-item m-3">
-      <span class="Header-link" onclick="">排行榜</span>
+      <span class="Header-link" onclick="signo()">登出</span>
     </div>
   </div>
   <div class="marsk-container"></div>
@@ -133,6 +141,30 @@
       </div>
     </div>
   </div>
+  <div class="popwindow" id="changepass">
+    <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px; height: 500px">
+      <div class="Box-header">
+        <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+          <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+            <path fill-rule="evenodd"
+              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+            </path>
+          </svg>
+        </button>
+        <h3 class="Box-title">EZBabyCTF修改密码</h3>
+      </div>
+      <div class="overflow-hidden type-father" style="height: 50vh">
+        <div class="Box-body overflow-y-auto type-js" id="changepasstyping" style="height: 94%">
+          <p class="text-js">>又见面了！打算把密码改成什么呀</p>
+          <p></p>
+        </div>
+      </div>
+      <div class="Box-footer">
+        <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="changepassipt" />
+        <button type="button" class="btn btn-block push">确定</button>
+      </div>
+    </div>
+  </div>
   <script>
     $(document).ready(function () {
       $(".Header-link").click(function () {
@@ -148,12 +180,23 @@
       var flag = 0;
       $(".push").click(function push() {
         $(".push").attr("disabled", "disabled");
-        if ($("#signin").css("display") == "none") {
-          var doing = "#signupipt";
-        } else {
+        if (($("#signin").css("display") == "none") && ($("#signup").css("display") == "none")) {
+          var doing = "#changeipt";
+          if (flag != 100) {
+            window.alert('error:2');
+            return;
+          }
+        }
+        else if (($("#signup").css("display") == "none") && ($("#changepass").css("display") == "none")) {
           var doing = "#signinipt";
-          if (flag == 0) {
+          if (flag < 10) {
             flag = 10;
+          }
+        }
+        else if (($("#signin").css("display") == "none") && ($("#changepass").css("display") == "none")) {
+          var doing = "#signupipt";
+          if (flag > 9) {
+            flag = 0;
           }
         }
         var app = $(doing).val();
@@ -171,6 +214,10 @@
           flag = ret.flag;
           typing(doing, 4000);
         }, 1000);
+        $(doing).val("");
+        // if (flag == 12) {
+        //   window.location.reload();
+        // }
       });
       $(".submittingbtn").click(function () {
         submitFlag(1);
@@ -194,7 +241,10 @@
     function notif() {
       window.location.href = "notifications.html";
     }
-
+    function chapas() {
+      $("#changepass").show();
+      typing("#changepassipt", 2000);
+    }
 
   </script>
   <!-- var id = $(this).attr("id") + "ipt"; if ($("#" + id)) submitFlag($("#" +

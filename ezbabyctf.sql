@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.34, for Linux (x86_64)
 --
 -- Host: localhost    Database: ezbabyctf
 -- ------------------------------------------------------
--- Server version	5.7.31
+-- Server version	5.7.34-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -95,9 +95,10 @@ DROP TABLE IF EXISTS `scoreboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `scoreboard` (
-  `id` int(11) NOT NULL,
+  `id` varchar(32) NOT NULL,
   `tname` varchar(100) NOT NULL,
-  `score` int(11) NOT NULL
+  `score` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,12 +119,12 @@ DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(32) NOT NULL,
   `tname` varchar(100) NOT NULL,
   `captain` varchar(100) NOT NULL,
   `active` char(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +133,6 @@ CREATE TABLE `teams` (
 
 LOCK TABLES `teams` WRITE;
 /*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (1,'team1','','1');
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,6 +158,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('c4ca4238a0b923820dcc509a6f75849b','1','__NONE__','1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -170,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-10 10:32:39
+-- Dump completed on 2021-10-18 19:56:48
