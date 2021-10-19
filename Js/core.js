@@ -1,5 +1,6 @@
 var nam = "";
 var passwd = "";
+var passwdn = "";
 function director(val, flag, re) {
     switch (flag) {
         case 0:
@@ -141,7 +142,7 @@ function director(val, flag, re) {
                         return;
 
                     } else {
-                        re.content = nam + "wwww超级想念你";
+                        re.content = nam;
                         re.flag = 12;
                         return;
                     }
@@ -152,6 +153,53 @@ function director(val, flag, re) {
                     return;
                 }
             })
+            break;
+        case 101:
+            if (val != 0) {
+                var psswd = "" + val;
+                passwdn = hex_md5(psswd);
+                re.content = "额，我忘了你原来的密码了，你再说一遍？";
+                re.flag = 101;
+                return;
+            } else {
+                re.content = "不想理你，重新说";
+                re.flag = 100;
+                return;
+            }
+            break;
+        case 102:
+            if (val != 0) {
+                var unam = "" + val;
+                passwd = hex_md5(unam);
+                re.content = "嗯!很好，我现在又忘了你要改成啥了";
+                re.flag = 102;
+                return;
+            } else {
+                re.content = "你故意找茬是不是啊？";
+                re.flag = 101;
+                return;
+            }
+            break;
+        case 103:
+            if (val != 0) {
+                var psswd = "" + val;
+                nam = $.cookie("salt").substring(0, 31);
+                if (hex_md5(psswd) == passwdn) {
+                    $.ajax({
+                        url: "settings.php",
+                        type:"GET",
+                        async:false,
+                        data:{
+                            
+                        }
+
+                    })
+                }
+            } else {
+                re.content = "";
+                re.flag = 102;
+                return;
+            }
             break;
         default:
             return;

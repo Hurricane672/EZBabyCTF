@@ -29,7 +29,7 @@
     </div>
 
     <div class="Header-item m-3">
-      <span class="Header-link" onclick="team()">战队</span>
+      <span class="Header-link" id="team">战队</span>
     </div>
     <div class="Header-item m-3">
       <span class="Header-link" onclick="">排行榜</span>
@@ -41,10 +41,10 @@
       <span class="Header-link" onclick="signi()">登录</span>
     </div>
     <div class="Header-item m-3 logon">
-      <span class="Header-link" onclick="chapas()">修改密码</span>
+      <span class="Header-link" id="chapas">修改密码</span>
     </div>
     <div class="Header-item m-3 logon">
-      <span class="Header-link" onclick="signo()">登出</span>
+      <span class="Header-link" id="signo">登出</span>
     </div>
   </div>
   <div class="marsk-container"></div>
@@ -216,26 +216,52 @@
           typing(doing, 4000);
         }, 1000);
         $(doing).val("");
-        // if (flag == 12) {
-        //   window.location.reload();
-        // }
+        if (flag == 12) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
       });
       $(".submittingbtn").click(function () {
         submitFlag(1);
       });
-
-      if ($.cookie("salt") != 0 && Number(code) <= now) {
+      console.log($.cookie("salt"));
+      if ($.cookie("salt") != undefined) {
         var date = new Date();
         var now = date.getTime();
         var code = $.cookie("salt");
-        code = code.substring(32);
-        flag = 10;
-        $(".logon").show();
+        if (Number(code.substring(32)) <= now) {
+          flag = 100;
+          $(".logon").show();
+        }
+        else {
+          $(".logout").show();
+        }
 
       }
       else {
         $(".logout").show();
       }
+      $("#signo").click(function () {
+        if (flag != 100) {
+          window.alert("请先登录！");
+          return;
+        }
+        else {
+          $.removeCookie('salt');
+          window.location.reload();
+        }
+
+      })
+      $("#chapas").click(function () {
+        if (flag != 100) {
+          window.alert("请先登录！");
+          return;
+        }
+        $("#changepass").show();
+        typing("#changepassipt", 2000);
+
+      })
     });
     function signp() {
       $("#signup").show();
@@ -250,14 +276,18 @@
       $(".marsk-container").hide();
     }
     function team() {
+      if (flag != 100) {
+        window.alert("请先登录！");
+        return;
+      }
       window.location.href = "team.html";
     }
     function notif() {
+      if (flag != 100) {
+        window.alert("请先登录！");
+        return;
+      }
       window.location.href = "notifications.html";
-    }
-    function chapas() {
-      $("#changepass").show();
-      typing("#changepassipt", 2000);
     }
 
   </script>
@@ -275,8 +305,9 @@ id).val()); -->
   11：登录用户名
   12：登录密码
   100：登陆成功
-  101：登出
-  105：修改密码
+  101：修改密码
+  102: 确认旧密码
+  103：确认新密码
 
   http://192.168.79.130
  -->
