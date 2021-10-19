@@ -30,10 +30,10 @@
         <span id="Head">EZBabyCTF队伍</span>
       </div>
       <div class="Header-item m-3">
-        <span class="Header-link" onclick="tonotif()">通知 </span>
+        <span class="Header-link" id="notif">通知 </span>
       </div>
       <div class="Header-item m-3">
-        <span class="Header-link" onclick="returnindex()">返回首页</span>
+        <span class="Header-link" id="returnindex">返回首页</span>
       </div>
     </div>
     <div class="Box anim-fade-in team">
@@ -41,6 +41,11 @@
       <div class="Box-body">你这里空空如也啊</div>
     </div>
     <script>
+      $(document).ready(function(){
+        $()
+
+
+      })
       function returnindex() {
         window.location.href = "index.html";
       }
