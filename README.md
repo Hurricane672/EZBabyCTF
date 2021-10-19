@@ -25,25 +25,105 @@
 ### 2.1 目录结构
 
 ``` text
-EZBabyCTF:.
-│  challenges.html
-│  ezbabyctf逻辑.pptx
-│  index.html
-│  message.html
-│  notifications.html
-│  README.md
-│  scoreboard.html
-│  settings.html
-│  signin.html
-│  signout.html
-│  signup.html
-│  team.html
-│  teams.html
-│  各用户所拥有的功能.pdf
-│
-└─admin
-        add.html
-        edit.html
+EZBabyCTF# tree -L 3
+.
+├── acceptinvite.php
+├── admin
+│   ├── add.html
+│   └── add.php
+├── attaches
+│   ├── 1
+│   ├── 2.jpg
+│   ├── 3.png
+│   └── 各用户所拥有的功能.pdf
+├── challenge.php
+├── challenges
+│   ├── BlockChain
+│   │   ├── EasyFJump
+│   │   └── HackChain
+│   ├── Crypto
+│   │   ├── Uncommon Factors I
+│   │   └── Uncommon Factors II
+│   ├── Misc
+│   │   ├── CheckIn
+│   │   ├── misc_ezshell
+│   │   ├── Monopoly
+│   │   └── RCTF_CoolCat
+│   ├── Pwn
+│   │   ├── catch_the_frog-pwn-docker
+│   │   ├── ezheap
+│   │   ├── game
+│   │   ├── musl
+│   │   ├── Pokemon
+│   │   ├── pwn_warmnote
+│   │   ├── sharing-pwn-docker
+│   │   └── unistruct-pwn-docker
+│   ├── RCTF WriteUp By Nu1L-2.pdf
+│   ├── README.md
+│   ├── Recv
+│   │   ├── dht
+│   │   ├── Harmony
+│   │   ├── LoongArch
+│   │   ├── sakuretsu
+│   │   ├── two_shortest
+│   │   └── Valgrind
+│   └── Web
+│       ├── CandyShop
+│       ├── EasyPHP
+│       ├── EasySQLi
+│       ├── hiphop
+│       ├── ns_shaft_sql
+│       ├── README.md
+│       ├── VerySafe
+│       └── xss_it
+├── challenges.html
+├── close_docker.php
+├── createteam.php
+├── css
+│   ├── basic.css
+│   └── primer.css
+├── ezbabyctf.sql
+├── flag.php
+├── fonts
+│   ├── UbuntuMono-BI.ttf
+│   ├── UbuntuMono-B.ttf
+│   ├── UbuntuMono-RI.ttf
+│   ├── UbuntuMono-R.ttf
+│   └── 方正小标宋简体.ttf
+├── img
+│   └── -bg.jpg
+├── index.html
+├── index.php
+├── invitemember.php
+├── Js
+│   ├── axios.js
+│   ├── core.js
+│   ├── load.js
+│   ├── mask.js
+│   ├── md5.js
+│   └── tpef.js
+├── message.html
+├── notifications.html
+├── notifications.php
+├── open_docker.html
+├── open_docker.php
+├── README.md
+├── removemember.php
+├── removeteam.php
+├── scoreboard.html
+├── scoreboard.php
+├── settings.html
+├── settings.php
+├── signin.html
+├── signin.php
+├── signout.html
+├── signup.htm
+├── signup.php
+├── team.html
+├── team.php
+├── teams.html
+├── teams.php
+└── test.php
 ```
 
 ### 2.2 数据库结构
