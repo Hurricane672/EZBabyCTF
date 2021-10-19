@@ -19,7 +19,7 @@ else{
         }
         else{
             echo "Successfully sign in!";
-            setcookie("salt",$id.time());
+            setcookie("salt",md5($name).time());
             //header("Location:index.html");
         }
     }
