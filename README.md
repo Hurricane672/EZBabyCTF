@@ -8,7 +8,7 @@
 
 ## 1. 项目概要设计
 
- 仿照开源项目[ctfd](https://github.com/CTFd/CTFd)，利用HTML、JS、CSS、PHP、MySQL技术栈开发一个**全新的**能完成CTF日常练习基本功能的网站。经本组成员讨论研究决定要实现的功能包括但不限于：
+ 仿照开源项目[CTFd](https://github.com/CTFd/CTFd)，利用HTML、JS、CSS、PHP、MySQL技术栈开发一个**全新的**能完成CTF日常练习基本功能的网站。经本组成员讨论研究决定要实现的功能包括但不限于：
 
 -   普通用户：登录(signin.html)、登出(signout.html)、注册(signup.html)；查看并查找团队、可以选择加入的团队(teams.html)；查看团队计分板(scoreboard.html)；查看题目、下载附件、提交FLAG(challenges.html)；查看团队邀请录用信息(notifications.html)；给管理员留言(message.html)；修改密码(settings.html)
 -   队长：在普通用户的基础上可以创建解散战队、对战队成员进行管理包括邀请新成员、删除无关成员(team.html)；修改密码(settings.html)
@@ -25,14 +25,23 @@
 ### 2.1 目录结构
 
 ``` text
-EZBabyCTF# tree -L 3
+EZBabyCTF$ tree -L 3
 .
+├── Js
+│   ├── axios.js
+│   ├── core.js
+│   ├── load.js
+│   ├── mask.js
+│   ├── md5.js
+│   └── tpef.js
+├── README.md
 ├── acceptinvite.php
+├── add.html
 ├── admin
 │   ├── add.html
 │   └── add.php
 ├── attaches
-│   ├── 1
+│   ├── 1.jpg
 │   ├── 2.jpg
 │   ├── 3.png
 │   └── 各用户所拥有的功能.pdf
@@ -46,37 +55,36 @@ EZBabyCTF# tree -L 3
 │   │   └── Uncommon Factors II
 │   ├── Misc
 │   │   ├── CheckIn
-│   │   ├── misc_ezshell
 │   │   ├── Monopoly
-│   │   └── RCTF_CoolCat
+│   │   ├── RCTF_CoolCat
+│   │   └── misc_ezshell
 │   ├── Pwn
+│   │   ├── Pokemon
 │   │   ├── catch_the_frog-pwn-docker
 │   │   ├── ezheap
 │   │   ├── game
 │   │   ├── musl
-│   │   ├── Pokemon
 │   │   ├── pwn_warmnote
 │   │   ├── sharing-pwn-docker
 │   │   └── unistruct-pwn-docker
 │   ├── RCTF WriteUp By Nu1L-2.pdf
 │   ├── README.md
 │   ├── Recv
-│   │   ├── dht
 │   │   ├── Harmony
 │   │   ├── LoongArch
+│   │   ├── Valgrind
+│   │   ├── dht
 │   │   ├── sakuretsu
-│   │   ├── two_shortest
-│   │   └── Valgrind
+│   │   └── two_shortest
 │   └── Web
 │       ├── CandyShop
 │       ├── EasyPHP
 │       ├── EasySQLi
-│       ├── hiphop
-│       ├── ns_shaft_sql
 │       ├── README.md
 │       ├── VerySafe
+│       ├── hiphop
+│       ├── ns_shaft_sql
 │       └── xss_it
-├── challenges.html
 ├── close_docker.php
 ├── createteam.php
 ├── css
@@ -85,39 +93,26 @@ EZBabyCTF# tree -L 3
 ├── ezbabyctf.sql
 ├── flag.php
 ├── fonts
-│   ├── UbuntuMono-BI.ttf
 │   ├── UbuntuMono-B.ttf
-│   ├── UbuntuMono-RI.ttf
+│   ├── UbuntuMono-BI.ttf
 │   ├── UbuntuMono-R.ttf
+│   ├── UbuntuMono-RI.ttf
 │   └── 方正小标宋简体.ttf
 ├── img
 │   └── -bg.jpg
 ├── index.html
 ├── index.php
 ├── invitemember.php
-├── Js
-│   ├── axios.js
-│   ├── core.js
-│   ├── load.js
-│   ├── mask.js
-│   ├── md5.js
-│   └── tpef.js
-├── message.html
 ├── notifications.html
 ├── notifications.php
 ├── open_docker.html
 ├── open_docker.php
-├── README.md
 ├── removemember.php
 ├── removeteam.php
 ├── scoreboard.html
 ├── scoreboard.php
-├── settings.html
 ├── settings.php
-├── signin.html
 ├── signin.php
-├── signout.html
-├── signup.htm
 ├── signup.php
 ├── team.html
 ├── team.php
@@ -203,181 +198,6 @@ mysql> desc users;
 ![2](attaches/2.jpg)
 
 
-```mysql
--- MySQL dump 10.13  Distrib 5.7.31, for Win64 (x86_64)
---
--- Host: localhost    Database: ezbabyctf
--- ------------------------------------------------------
--- Server version	5.7.31
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `challenges`
---
-
-DROP TABLE IF EXISTS `challenges`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `challenges` (
-  `id` varchar(10) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `category` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `value` int(11) NOT NULL,
-  `flag` varchar(100) NOT NULL,
-  `file` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `challenges`
---
-
-LOCK TABLES `challenges` WRITE;
-/*!40000 ALTER TABLE `challenges` DISABLE KEYS */;
-/*!40000 ALTER TABLE `challenges` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `done`
---
-
-DROP TABLE IF EXISTS `done`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `done` (
-  `id` varchar(10) NOT NULL,
-  `challenge` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `done`
---
-
-LOCK TABLES `done` WRITE;
-/*!40000 ALTER TABLE `done` DISABLE KEYS */;
-/*!40000 ALTER TABLE `done` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `notifications`
---
-
-DROP TABLE IF EXISTS `notifications`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notifications` (
-  `from` varchar(100) NOT NULL,
-  `to` varchar(100) NOT NULL,
-  `message` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `notifications`
---
-
-LOCK TABLES `notifications` WRITE;
-/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
-/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `scoreboard`
---
-
-DROP TABLE IF EXISTS `scoreboard`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scoreboard` (
-  `id` int(11) NOT NULL,
-  `tname` varchar(100) NOT NULL,
-  `score` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `scoreboard`
---
-
-LOCK TABLES `scoreboard` WRITE;
-/*!40000 ALTER TABLE `scoreboard` DISABLE KEYS */;
-/*!40000 ALTER TABLE `scoreboard` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teams`
---
-
-DROP TABLE IF EXISTS `teams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `teams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tname` varchar(100) NOT NULL,
-  `captain` varchar(100) NOT NULL,
-  `active` char(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `teams`
---
-
-LOCK TABLES `teams` WRITE;
-/*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (1,'team1','','1');
-/*!40000 ALTER TABLE `teams` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` varchar(10) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `team` varchar(100) NOT NULL,
-  `password` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=u;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-10-10  8:34:50
-
-```
 
 ```text
 Create Virtul Host directory......
@@ -400,7 +220,7 @@ Database userpassword: ezbabyctf
 Database Name: ezbabyctf
 Create ftp account: no
 ================================================
-ubuntu password: 20020221
+ubuntu password: ********
 mysql root password : null
 ```
 
@@ -497,4 +317,301 @@ echo "192.168.223.131:" . $Num;
 2021年10月19日更新
 
 ------
+
+### 2.5 界面
+
+#### 2.5.1 鸣谢：primer 和 jQuery 以及前端前言
+
+​		界面的设计基本风格源自[CTFd](https://github.com/CTFd/CTFd)以及开发过程中使用`jQuery`以及`primer.css`辅助开发，大大减少网页样式以及Javascript的代码量。但是作为初学者还是不可避免地写了非常多非常复杂并且**缺乏注释**的HTML代码。但这篇README.md会尽可能对代码进行解释，望大家海涵。直至我写这段话时，仅仅写了一部分`index.html`、`add.html`并且功能都尚未完成。但已经完成的是用户管理部分。
+
+#### 2.5.2 index.html
+
+##### 2.5.2.1 第一部分：**每次**在**进入页面的瞬间**需要加载的
+
+```javascript
+$(document).ready(function () {})
+```
+
+​		使用jQuery提供的加载函数优于JavaScript的`window.onload=function(){}`原因如下：
+
+			1. `window.onload=function(){}`不能同时写多个，后面的将会覆盖前面的。
+   			2. `window.onload=function(){}`在页面所有元素（包括图片，引用文件）加载完后执行。
+
+
+
+- 用户是否已经登录：通过`cookie`实现
+
+  ```javascript
+  if ($.cookie("salt") != undefined) {
+          var date = new Date();
+          var now = date.getTime();
+          var code = $.cookie("salt");
+          if (Number(code.substring(32)) <= now) {
+            flag = 100;                                    //flag的用途将在2.5.2.2中说明
+            $(".logon").show();
+          }
+          else {
+            $(".logout").show();
+          }
+  
+        }
+        else {
+          $(".logout").show();
+        }
+  ```
+
+  
+
+- 用户是否是管理员：通过`cookie`调取用户名，向后端发起带有用户名的请求，得到是管理员的答复后开放题目管理入口
+
+  ```javascript
+  // 这里使用的是直接在 admin.html 文件上加验证，不再在 index.html 上验证，避免用户直接通过url进行跳转
+  // 所以这个功能已经作废。现在的网页上任何登录的用户能看到 "出题" 一按钮但是点击进入后会被重定向回 index.html
+  // 实现代码详情见 2.5.3 admin.html
+  ```
+
+
+
+- 检查：所有弹窗`class="popwindow"`、`class="pophint"`是否处于关闭状态
+
+- 加载所有按钮：登录、注册、修改密码、登出、排行榜、战队、消息、出题
+
+  检查弹窗幕布`class="marsk-container"`是否处于不显示状态
+
+  ```javascript
+  $(document).ready(function () {
+        $(".Header-link").click(function () {
+          $(".marsk-container").show();
+        })
+        $(".marsk-container").click(function () {
+          $(".marsk-container").hide();
+          $(".popwindow").hide();
+          $(".pophint").hide()
+        })
+      })
+  ```
+
+  ​		上面代码中的弹窗和弹出提示`class="popwindow"`、`class="pophint"`都比较复杂，将会在后文中讲到。这里举一下弹窗幕布的例子：
+
+  ```html
+   <div class="marsk-container"></div>
+  ```
+
+  ```css
+  .marsk-container {
+    position: absolute;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+  }
+  ```
+
+  ​		要求弹窗幕布要在弹窗出现时出现，达到背景变暗的效果，在幕布存在的情况下，只要点击弹窗意外的任何地方，都能够使得弹窗隐藏。
+
+  JavaScript实现代码如下：
+
+  ```javascript
+  $(document).ready(function () {
+      $(".popwindow").click(function () {
+          $(".marsk-container").show();
+      })
+      $(".marsk-container").click(function () {
+          $(".marsk-container").hide();
+          $(".popwindow").hide();
+          $(".pophint").hide()
+      })
+  })
+  ```
+
+  
+
+- 加载所有按钮：登录、注册、修改密码、登出、排行榜、战队、消息、出题
+
+  以下是**HTML**代码
+
+  ```html
+  <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
+      <div class="Header-item m-auto">
+        <span id="Head">EZBabyCTF</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" id="notif">通知 </span>
+      </div>
+  
+      <div class="Header-item m-3">
+        <span class="Header-link" id="team">战队</span>
+      </div>
+      <div class="Header-item m-3">
+        <span class="Header-link" onclick="">排行榜</span>
+      </div>
+      <div class="Header-item m-3 logout">
+        <span class="Header-link" onclick="signp()">注册</span>
+      </div>
+      <div class="Header-item m-3 logout">
+        <span class="Header-link" onclick="signi()">登录</span>
+      </div>
+      <div class="Header-item m-3 logon">
+        <span class="Header-link" id="chapas">修改密码</span>
+      </div>
+      <div class="Header-item m-3 logon">
+        <span class="Header-link" id="signo">登出</span>
+      </div>
+    </div>
+  ```
+
+  ​		在上面的HTML代码中，分别用`class="logon"`和`class="logout"`标识出**登录状态**以及**未登录状态**要显示的导航栏按钮，除此之外还有导航栏上不同的按钮对应的id用于触发事件以及理清逻辑。
+
+  ```javascript
+        $("#signo").click(function () {
+          if (flag != 100) {
+            window.alert("请先登录！");
+            return;
+          }
+          else {
+            $.removeCookie('salt');
+            window.location.reload();
+          }
+  
+        })
+        $("#chapas").click(function () {
+          if (flag != 100) {
+            window.alert("请先登录！");
+            return;
+          }
+          $("#changepass").show();
+          typing("#changepassipt", 2000);
+  
+        })
+        $("#team").click(function () {
+          if (flag != 100) {
+            window.alert("请先登录！");
+            return;
+          }
+          window.location.href = "team.html";
+  
+        })
+        $("#notif").click(function () {
+          if (flag != 100) {
+            window.alert("请先登录！");
+            return;
+          }
+          window.location.href = "notifications.html";
+  
+        })
+  ```
+
+- 加载题目，尚在开发中
+
+  ```javascript
+  ```
+
+  
+
+##### 2.5.2.2 第二部分：用户状态标识、注册、登录、修改密码
+
+###### 用户状态标识：flag
+
+```javascript
+$(document).ready(function () {
+      var flag = 0;
+      ……
+```
+
+​		在网页加载的时候，一个负责记录用户状态的变量被定义：它用来记录用户的账户状态。它用于快捷地在网站打开状态下的JavaScript自行判断用户的账户状态。在涉及重要事务比如管理员账户设置还是需要cookie和后端交流。判断规则如下：
+
+```html
+  0：注册初始状态
+  1：注册用户名
+  2：注册密码
+  3：确认密码
+  10：登录初始态
+  11：登录用户名
+  12：登录密码
+  100：登陆成功
+  101：修改密码
+  102: 确认旧密码
+  103：确认新密码
+```
+
+
+
+设置`var flag`的初衷是为了**配合本网站特质的注册登录界面**
+
+
+
+![微信图片_20211020113554](D:\experimentalClass\EZBabyCTF\EZBabyCTF\attaches\4.png)
+
+
+
+​		预期涉及本网站的注册、登录、修改密码的操作都由图所示的对话框来完成。根据对话框的提示，用户依次输入需要提交的部分。同时由网站输出的话会有`typing`的特效。因为提交框只设置了一个，因此不得不对每次的用户提交做辨析。因此不得不**引入flag来标志用户的这一步输入是什么内容**。
+
+​		因此通过flag来标志用户的状态成为本网站的一个特色，也成为一个可能**被攻击的薄弱点**。
+
+下面是flag的具体应用：
+
+登录注册的核心JavaScript函数：确定按钮的点击事件
+
+```javascript
+	$(".push").click(function push() {
+        $(".push").attr("disabled", "disabled");
+        if (($("#signin").css("display") == "none") && ($("#signup").css("display") == "none")) {
+          var doing = "#changepassipt";
+          if (flag < 100 || flag > 104) {
+            window.alert('error:2');
+            return;
+          }
+        }
+        else if (($("#signup").css("display") == "none") && ($("#changepass").css("display") == "none")) 		 {
+          var doing = "#signinipt";
+          if (flag < 10) {
+            flag = 10;
+          }
+        }
+        else if (($("#signin").css("display") == "none") && ($("#changepass").css("display") == "none")) 		 {
+          var doing = "#signupipt";
+          if (flag > 9) {
+            flag = 0;
+          }
+        }
+        var app = $(doing).val();
+        var toappd = $(doing).parent().parent().find(".text-js");
+        toappd.append("<p>>" + app + "<p/>");
+        flag++;
+        var ret = {
+          content: "",
+          flag: 0
+        };
+        setTimeout(function () {
+          director(app, flag, ret);
+          toappd.removeAttr("class");
+          toappd.append("<p class='text-js'>>" + ret.content + "<p/>");
+          flag = ret.flag;
+          typing(doing, 4000);
+        }, 1000);
+        $(doing).val("");
+        if (flag == 12) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      });
+```
+
+里面调用了几个外部的函数：
+
+- `director(val, flag, ret)`这是整个用户管理的核心导航函数，会根据传入的flag的不同进行不同的操作，val是用户输入的字符串，ret是一个用于返回网站答复的对象，它有两个属性：
+
+```javascript
+var ret = {
+          content: "",                                               //接收下一句需要显示的提示
+          flag: 0                                                    //设定新的flag的值
+        };
+```
+
+- `typing(ipt,speed)`这是打印特效需要的函数，会根据正在工作的弹窗（用参数ipt标出）和打印速度对具有`class="text-js"`属性的HTML元素施加打印特效。
 
