@@ -22,9 +22,63 @@
       font-weight: bold;
     }
 
+
     .upchallenge {
       height: 530px;
       display: none;
+    }
+
+    #topic {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+    }
+
+    #editor1 {
+      height: 61%;
+    }
+
+    #discibe {
+      position: absolute;
+      top: 40%;
+      left: 10%;
+    }
+
+    #setscore {
+      position: absolute;
+      top: 70%;
+      left: 10%;
+    }
+
+    #setflag {
+      position: absolute;
+      top: 20%;
+      right: 10%;
+    }
+
+    #settype {
+      position: absolute;
+      top: 45%;
+      right: 12.5%;
+    }
+
+    #setfile {
+      position: absolute;
+      top: 70%;
+      right: -4.3%;
+    }
+
+    #Sbmit {
+      position: absolute;
+      left: 50%;
+      top: 85%;
+      width: 10%;
+      transform: translate(-50%);
+    }
+
+    textarea {
+      width: 213px;
+      resize: none;
     }
   </style>
 </head>
@@ -41,7 +95,8 @@
   <div class="Box anim-fade-in upbox">
     <div class="Box-header Link" id="submitchallenge">上传题目</div>
     <div class="Box-body upchallenge">
-      <div id="render1"><button class="btn-mktg btn-transparent enlarge m-2" type="button" style="position: relative">
+      <div id="render1" class="Box-body"><button class="btn-mktg btn-transparent enlarge m-2" type="button"
+          style="position: relative">
           <div class="Box-btn-octicon btn-octicon float-right settingc" type="button">
             <svg class="octicon octicon-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
               height="24">
@@ -66,12 +121,63 @@
           </div>
         </button>
       </div>
-      <div id="editor1">
-        <form action="admin/add.php" method="post" enctype="multipart/form-data">
-          type_name: <input type="text" name="type_name">
-          <label for="file">文件名：</label>
-          <input type="file" name="file" id="file"><br>
-          <input class="btn" type="submit" value="提交">
+      <div class="Box-body" id="editor1" style="position: relative;">
+        <form action="admin/add.php" method="post" enctype="multipart/form-data"
+          onsubmit="if(event.keyCode==13){return false;}">
+          <div id="topic">
+            <span>
+              题目名称：
+            </span>
+            <span>
+              <input class="form-control" id="chaname" type="text" name="chall_name" onblur="render()"
+                placeholder="题目需要包含题目类别">
+            </span>
+          </div>
+          <div id="discibe">
+            <span>
+              题目描述：
+            </span>
+            <span>
+              <textarea class="form-control" id="area" name="chall_des" onblur="render()"
+                placeholder="题目描述不要超过56个字"></textarea>
+            </span>
+          </div>
+          <div id="setscore">
+            <span>
+              题目分值：
+            </span>
+            <span>
+              <input class="form-control" id="chascore" type="number" onblur="render()" name="chall_score"
+                placeholder="1000">
+            </span>
+          </div>
+          <div id="setflag">
+            <span>
+              题目Flag：
+            </span>
+            <span>
+              <input class="form-control" type="text" name="chall_flag" onblur="render()"
+                placeholder="flag{xxxxxxxxxx}">
+            </span>
+          </div>
+          <div id="settype" onblur="render()">
+            <span>
+              题目类型：
+            </span>
+            <span>
+              <label> <input type="radio" name="chall_type" value="misc" checked /> MISC </label>
+              <label> <input type="radio" name="chall_type" value="web" /> WEB </label>
+              <label> <input type="radio" name="chall_type" value="pwn" /> PWN </label>
+            </span>
+          </div>
+          <div id="setfile">
+            <span>
+              <label for="file">上传文件：</label>
+              <input type="file" name="chall_file" id="file" onblur="render()">
+            </span>
+          </div>
+
+          <button type="submit" id="Sbmit" class="btn btn-primary">提交</button>
         </form>
       </div>
     </div>
@@ -115,9 +221,36 @@
       $("#submitchallenge").click(function () {
         $(".upchallenge").toggle();
       })
-
+      render();
 
     })
+    document.onkeydown = function (event) {
+      var target, code, tag;
+      if (!event) {
+        event = window.event; //针对ie浏览器
+        target = event.srcElement;
+        code = event.keyCode;
+        if (code == 13) {
+          tag = target.tagName;
+          if (tag == "TEXTAREA") { return true; }
+          else { return false; }
+        }
+      }
+      else {
+        target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+        code = event.keyCode;
+        if (code == 13) {
+          tag = target.tagName;
+          if (tag == "INPUT") { return false; }
+          else { return true; }
+        }
+      }
+    };
+    function render() {
+      $(".challengename").text($("#chaname").val());
+      $(".challengedisc").text($("#area").val());
+      $(".score").text($("#chascore").val());
+    }
   </script>
 </body>
 

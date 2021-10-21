@@ -24,10 +24,12 @@
     <div class="Header-item m-auto">
       <span id="Head">EZBabyCTF</span>
     </div>
+    <div class="Header-item m-3 logon">
+      <span class="Header-link" id="amin">出题</span>
+    </div>
     <div class="Header-item m-3">
       <span class="Header-link" id="notif">通知 </span>
     </div>
-
     <div class="Header-item m-3">
       <span class="Header-link" id="team">战队</span>
     </div>
@@ -275,6 +277,13 @@
         }
         window.location.href = "notifications.html";
 
+      })
+      $("#amin").click(function () {
+        if (flag != 100) {
+          window.alert("请先登录！");
+          return;
+        }
+        window.location.href = "admin.html";
       })
     });
     function signp() {
