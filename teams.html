@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="css/primer.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/basic.css" />
+  <script src="Js/mask.js"></script>
   <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <title>EZBabyCTF-team</title>
@@ -21,31 +22,41 @@
       font-weight: bold;
     }
 
-    .Box-row{
+    .Box-row {
       position: relative;
       height: 8vh;
     }
 
-    .tmname{
-      position:absolute;
+    .tmname {
+      position: absolute;
       left: 15%;
     }
-    .tmscore{
-      position:absolute;
+
+    .tmscore {
+      position: absolute;
       left: 45%;
     }
-    .tmcapt{
-      position:absolute;
+
+    .tmcapt {
+      position: absolute;
       left: 70%;
     }
-    .jointm{
-      position:absolute;
+
+    .jointm {
+      position: absolute;
       left: 90%;
+    }
+
+    #setnewtm {
+      position: absolute;
+      top: 35px;
+      right: -15%;
     }
   </style>
 </head>
 
 <body>
+
   <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
     <div class="Header-item m-auto">
       <span id="Head">EZBabyCTF队伍</span>
@@ -57,10 +68,12 @@
       <span class="Header-link" id="returnindex">返回首页</span>
     </div>
   </div>
-  <div class="Box anim-fade-in team">
+  <div class="marsk-container"></div>
+  <div class="Box anim-fade-in team" style="position: relative;">
+    <button class="btn-mktg btn-primary-mktg mr-3" id="setnewtm" type="button">创建我的战队</button>
     <div class="Box-header">战队</div>
 
-    <div class="Box-row1">
+    <div class="Box-row">
       <span class="tmname">队伍名称</span>
       <span class="tmscore">队伍分数</span>
       <span class="tmcapt">队长</span>
@@ -69,6 +82,27 @@
     <div class="Box-row">Box row using a div</div>
 
 
+  </div>
+
+  <div class="popwindow" id="setnwtm">
+    <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px;">
+      <div class="Box-header">
+        <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+          <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+            <path fill-rule="evenodd"
+              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+            </path>
+          </svg>
+        </button>
+        <h3 class="Box-title">EZBabyCTF战队创建</h3>
+      </div>
+
+      <div class="Box-footer">
+        <div><strong>请输入您要创建的战队名</strong> </div>
+        <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="signupipt" />
+        <button type="button" class="btn btn-block addnew">确定</button>
+      </div>
+    </div>
   </div>
   <script>
     $(document).ready(function () {
@@ -101,8 +135,20 @@
       }
     })
     $(document).ready(function () {
+      $(".marsk-container").click(function () {
+        $(".marsk-container").hide();
+        $(".popwindow").hide();
+        $(".pophint").hide()
+      })
+      $("#setnewtm").click(
+        function () {
+          $(".popwindow").show();
 
-
+        }
+      )
+      $("#addnew").click(function () {
+        .
+      })
 
     })
     function returnindex() {
