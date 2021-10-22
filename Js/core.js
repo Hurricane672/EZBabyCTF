@@ -252,8 +252,7 @@ function typing(ipt, time) {
         $(".push").removeAttr("disabled");
         $(ipt).keypress(function (event) {
             if (
-                event.keyCode == 13 &&
-                "disabled" != $(ipt).parent().find(".push").attr("disabled")
+                event.keyCode == 13 && "disabled" != $(ipt).parent().find(".push").attr("disabled")
             ) {
                 $(ipt).parent().find(".push").trigger("click");
             }

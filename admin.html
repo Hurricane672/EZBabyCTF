@@ -10,6 +10,7 @@
   <script src="Js/md5.js"></script>
   <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script src="Js/axform.js"></script>
   <title>EZBabyCTF-出题</title>
   <style>
     .upbox {
@@ -26,6 +27,10 @@
     .upchallenge {
       height: 530px;
       display: none;
+    }
+
+    .errorhps {
+      background-color: red;
     }
 
     #topic {
@@ -129,7 +134,7 @@
               题目名称：
             </span>
             <span>
-              <input class="form-control" id="chaname" type="text" name="chall_name" onblur="render()"
+              <input class="form-control errorhps " id="chaname" type="text" name="chall_name" onblur="render()"
                 placeholder="题目需要包含题目类别">
             </span>
           </div>
@@ -214,7 +219,19 @@
           }
         })
       }
-
+      $("form").ajaxForm(function (data) {
+        console.log(data);
+        console.log("str:" + JSON.stringify(data));
+        switch (error) {
+          case 0:
+            
+            break;
+        
+          default:
+            break;
+        }
+      }
+      );
       $("#returnindex").click(function () {
         window.location.href = "index.html";
       })
@@ -237,7 +254,7 @@
         }
       }
       else {
-        target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+        target = event.target;
         code = event.keyCode;
         if (code == 13) {
           tag = target.tagName;

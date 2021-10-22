@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/basic.css" />
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <title>EZBabyCTF-team</title>
+  <style>
+    .team {
+      width: 1024px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: large;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
+    <div class="Header-item m-auto">
+      <span id="Head">EZBabyCTF队伍</span>
+    </div>
+    <div class="Header-item m-3">
+      <span class="Header-link" id="notif">通知 </span>
+    </div>
+    <div class="Header-item m-3">
+      <span class="Header-link" id="returnindex">返回首页</span>
+    </div>
+  </div>
+  <div class="Box anim-fade-in team">
+    <div class="Box-header">战队</div>
+
+    <div class="Box-row">
+      <span class="tmname">队伍名称</span>
+      <span class="tmscore">队伍名称</span>
+      <span class="tm">队伍名称</span>
+    </div>
+    <div class="Box-row">Box row using a div</div>
+
+
+  </div>
+  <script>
+    $(document).ready(function () {
+      if ($.cookie("salt") == undefined) {
+        window.alert("error 3");
+        window.location.href = "index.html";
+      }
+      else {
+        var id = $.cookie("salt").substring(0, 32);
+        $.ajax({
+          url: "team.php",
+          type: "GET",
+          async: false,
+          dataType: "json",
+          data: {
+            id: id
+          },
+          success: function (response) {
+            console.log(response);
+            $.each(response, function (m1, m2) {
+              if (m2 != "__NONE__" && m1 === 0) {
+                window.location = "team.html";
+              }
+            })
+          },
+          error: function () {
+            window.alert("error:1");
+          }
+        })
+      }
+    })
+    $(document).ready(function () {
+
+
+
+    })
+    function returnindex() {
+      window.location.href = "index.html";
+    }
+    function tonotif() {
+      window.location.href = "notifications.html";
+    }
+  </script>
+</body>
+
+</html>
