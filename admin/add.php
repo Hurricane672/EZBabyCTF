@@ -27,13 +27,47 @@ function unzip_file(string $zipName, string $dest)
 	}
 }
 
+
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')&&!strstr($str,'\'')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
+
+if(check($_POST["chall_name"])&&check($_POST["chall_des"])&&check($_POST["chall_score"])&&check($_POST["chall_flag"]))
+{
+	die("Invalid characters");
+}
+if(mb_strlen($_POST["chall_name"]>56))
+{
+	die("challenge name too long");
+}
+if(mb_strlen($_POST["chall_des"]>56))
+{
+	die("challenge description too long");
+}
+if($_POST["chall_score"]>1000)
+{
+	die("challenge score too big");
+}
+if(mb_strlen($_POST["chall_flag"]>50)&&strstr($str,'flag{'))
+{
+	die("Invalid flag");
+}
+
+
 $allowedExts = array("zip");
 $temp = explode(".", $_FILES["chall_file"]["name"]);
 
 $extension = end($temp);     // 获取文件后缀名
 if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && ($_FILES["chall_file"]["size"] < 204800) && in_array($extension, $allowedExts)) {
 	if ($_FILES["chall_file"]["error"] > 0) {
-		echo "错误：: " . $_FILES["chall_file"]["error"] . "<br>";
+		die("错误：: " . $_FILES["chall_file"]["error"] . "<br>");
 	} else {
 
 		$cmd = "find / -name " . $_POST["chall_type"];
@@ -41,14 +75,14 @@ if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && ($_FILE
 
 
 		if (file_exists($path)) {
-			echo $_FILES["chall_file"]["name"] . " 文件已经存在。 ";
+			die(" 文件已经存在。 ");
 		} else {
 			move_uploaded_file($_FILES["chall_file"]["tmp_name"], $path);
 			echo "文件存储在: " . $path;
 		}
 	}
 } else {
-	echo "非法的文件格式";
+	die("非法的文件格式");
 }
 $no_extension_name = str_replace(".zip", "", $_FILES["chall_file"]["name"]);
 
@@ -59,8 +93,6 @@ unzip_file($path, $path2);
 
 $cmd3 = "rm ../challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];
 shell_exec($cmd3);
-
-
 
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
@@ -74,9 +106,9 @@ if ($conn->connect_error) {
 $sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path2 . "\")";
 
 if ($conn->query($sql) === TRUE) {
-	echo "success";
+	echo "<br>" . "success";
 } else {
-	echo "<br>" . "Error: " . $sql . "<br>" . $conn->error;
+	die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
 }
 
 $conn->close();
