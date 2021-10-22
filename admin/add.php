@@ -39,15 +39,17 @@ function check($str)
 }
 
 
-if(check($_POST["chall_name"])&&check($_POST["chall_des"])&&check($_POST["chall_score"])&&check($_POST["chall_flag"]))
+if(!check($_POST["chall_name"])&&!check($_POST["chall_des"])&&!check($_POST["chall_flag"]))
 {
 	die("Invalid characters");
 }
-if(mb_strlen($_POST["chall_name"]>56))
+	
+
+if(mb_strlen($_POST["chall_name"])>56)
 {
 	die("challenge name too long");
 }
-if(mb_strlen($_POST["chall_des"]>56))
+if(mb_strlen($_POST["chall_des"])>56)
 {
 	die("challenge description too long");
 }
@@ -55,7 +57,7 @@ if($_POST["chall_score"]>1000)
 {
 	die("challenge score too big");
 }
-if(mb_strlen($_POST["chall_flag"]>50)&&strstr($str,'flag{'))
+if(mb_strlen($_POST["chall_flag"])>50 && strstr($str,'flag{'))
 {
 	die("Invalid flag");
 }
