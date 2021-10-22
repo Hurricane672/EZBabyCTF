@@ -71,7 +71,7 @@ if ($conn->connect_error) {
 	die("Connection faild." . $conn->connect_error);
 }
 
-$sql = 'INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (md5($_POST["chall_name"]), $_POST["chall_name"],$_POST["chall_type"],$_POST["chall_des"],$_POST["chall_score"],$_POST["chall_flag"],$path2);';
+$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path2 . "\")";
 
 if ($conn->query($sql) === TRUE) {
 	echo "success";
