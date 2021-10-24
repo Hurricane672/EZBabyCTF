@@ -27,11 +27,19 @@
             position: relative;
             height: 8vh;
             text-align: left;
-            padding-left: 30%;
+            padding-left: 20%;
         }
-        #scoreboard{
+
+        #scoreboard {
             z-index: 5;
-            
+            height: 160px;
+            position: absolute;
+            top: 50px;
+            right: 3%;
+            color: var(--color-scale-yellow-3);
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.826);
+            font: bold 100px arial, verdana;
         }
 
         #setnewtm {
@@ -42,25 +50,25 @@
     </style>
 </head>
 
-<body>
+<body style="position: relative;">
 
     <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
         <div class="Header-item m-auto">
             <span id="Head">EZBabyCTF队伍</span>
         </div>
         <div class="Header-item m-3">
-            <span class="Header-link" id="notif">通知 </span>
+            <span class="Header-link" id="tonotif">通知 </span>
         </div>
         <div class="Header-item m-3">
             <span class="Header-link" id="returnindex">返回首页</span>
         </div>
     </div>
     <div class="marsk-container"></div>
-    <div id="scoreboard"></div>
-    <div class="Box anim-fade-in team" style="position: relative;">
+
+    <div class="Box anim-fade-in team" id="memberlist" style="position: relative;">
         <button class="btn-mktg btn-primary-mktg mr-3" id="setnewtm" type="button">管理我的战队</button>
+        <div class="border rounded-1 color-shadow-medium p-4" id="scoreboard">1000</div>
         <div class="Box-header">战队</div>
-        <div class="Box-row">Box row using a div</div>
 
 
     </div>
@@ -110,11 +118,17 @@
                     }
                 })
             }
+            $("#returnindex").click(function () {
+                window.location.href = "index.html";
+            })
+            $("#tonotif").click(function () {
+                window.location.href = "notifications.html";
+            })
         })
         function publish(response) {
             $(".Box-header").text(response[0]);
             for (let i = 2; i < response.length; i++) {
-                $(".Box").append("<div class=Box-row>"+response[i]+"</div>")
+                $("#memberlist").append("<div class=Box-row>" + response[i] + "</div>")
             }
         }
     </script>
