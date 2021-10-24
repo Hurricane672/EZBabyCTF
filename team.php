@@ -12,7 +12,7 @@ else{
     //
     if (isset($_GET["id"])) {
         //$tname=$_GET["tname"];
-        $name=$_GET["id"];
+        $id=$_GET["id"];
         //$s = "select team from ".$tb." where name=\"".$name."\" and captain=\"".$captain."\" active=\"1\"";
         $s = "select team from ".$tb." where id=\"".$id."\"";
         $r1 = $conn->query($s);
@@ -20,9 +20,9 @@ else{
         //echo $tname;
         $s3 = "select captain from teams where tname=\"".$tname."\"";
         $r3 = $conn->query($s3);
-        $captain = mysqli_fetch_row($r3)[0];
+        $captain = md5(mysqli_fetch_row($r3)[0]);
         //mysqli_affected_rows($conn)==1
-        if($name===$captain){
+        if($id===$captain){
             $s1="select name from users where team=\"".$tname."\"";
             $result = array($tname,"captain");
             $s2 = "select score from scoreboard where tname=\"".$tname."\"";
@@ -54,7 +54,7 @@ else{
                 }
             }
 
-            var_dump(json_encode($result));
+            exit(json_encode($result));
         }
     }
     else{

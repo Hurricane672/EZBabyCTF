@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/basic.css" />
+  <script src="Js/md5.js"></script>
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script src="Js/axform.js"></script>
+  <title>EZBabyCTF-出题</title>
+  <style>
+    .upbox {
+      width: 1024px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: large;
+      font-weight: bold;
+    }
+
+
+    .upchallenge {
+      height: 530px;
+      display: none;
+    }
+    #topic {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+    }
+
+    #editor1 {
+      height: 61%;
+    }
+
+    #discibe {
+      position: absolute;
+      top: 40%;
+      left: 10%;
+    }
+
+    #setscore {
+      position: absolute;
+      top: 70%;
+      left: 10%;
+    }
+
+    #setflag {
+      position: absolute;
+      top: 20%;
+      right: 10%;
+    }
+
+    #settype {
+      position: absolute;
+      top: 45%;
+      right: 12.5%;
+    }
+
+    #setfile {
+      position: absolute;
+      top: 70%;
+      right: -4.3%;
+    }
+
+    #Sbmit {
+      position: absolute;
+      left: 50%;
+      top: 85%;
+      width: 10%;
+      transform: translate(-50%);
+    }
+
+    textarea {
+      width: 213px;
+      resize: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
+    <div class="Header-item m-auto">
+      <span id="Head">EZBabyCTF上传题目</span>
+    </div>
+    <div class="Header-item m-3">
+      <span class="Header-link" id="returnindex">返回首页</span>
+    </div>
+  </div>
+  <div class="Box anim-fade-in upbox">
+    <div class="Box-header Link" id="submitchallenge">上传题目</div>
+    <div class="Box-body upchallenge">
+      <div id="render1" class="Box-body"><button class="btn-mktg btn-transparent enlarge m-2" type="button"
+          style="position: relative">
+          <div class="Box-btn-octicon btn-octicon float-right settingc" type="button">
+            <svg class="octicon octicon-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+              height="24">
+              <path fill-rule="evenodd"
+                d="M3 3.25c0-.966.784-1.75 1.75-1.75h5.5a.75.75 0 010 1.5h-5.5a.25.25 0 00-.25.25v17.5c0 .138.112.25.25.25h5.5a.75.75 0 010 1.5h-5.5A1.75 1.75 0 013 20.75V3.25zm16.006 9.5l-3.3 3.484a.75.75 0 001.088 1.032l4.5-4.75a.75.75 0 000-1.032l-4.5-4.75a.75.75 0 00-1.088 1.032l3.3 3.484H10.75a.75.75 0 000 1.5h8.256z">
+              </path>
+            </svg>
+          </div>
+          <div class="challengename">EZBabyWEB</div>
+          <div class="challengedisc">
+            题目描述：
+          </div>
+          <span class="score">1000</span>
+          <div class="submitflagfather">
+            <input class="form-control submitflag" type="text" placeholder="flag{xxxxxxx}" />
+            <span class="Box-btn-octicon btn-octicon submittingbtn" type="button"><svg class="octicon octicon-x"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                <path fill-rule="evenodd"
+                  d="M8.53 1.22a.75.75 0 00-1.06 0L3.72 4.97a.75.75 0 001.06 1.06l2.47-2.47v6.69a.75.75 0 001.5 0V3.56l2.47 2.47a.75.75 0 101.06-1.06L8.53 1.22zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z">
+                </path>
+              </svg></span>
+          </div>
+        </button>
+      </div>
+      <div class="Box-body" id="editor1" style="position: relative;">
+        <form action="admin/add.php" method="post" enctype="multipart/form-data"
+          onsubmit="if(event.keyCode==13){return false;}">
+          <div id="topic">
+            <span>
+              题目名称：
+            </span>
+            <span>
+              <input class="form-control errorhps " id="chaname" type="text" name="chall_name" onblur="render()"
+                placeholder="题目需要包含题目类别">
+            </span>
+          </div>
+          <div id="discibe">
+            <span>
+              题目描述：
+            </span>
+            <span>
+              <textarea class="form-control" id="area" name="chall_des" onblur="render()"
+                placeholder="题目描述不要超过56个字"></textarea>
+            </span>
+          </div>
+          <div id="setscore">
+            <span>
+              题目分值：
+            </span>
+            <span>
+              <input class="form-control" id="chascore" type="number" onblur="render()" name="chall_score"
+                placeholder="1000">
+            </span>
+          </div>
+          <div id="setflag">
+            <span>
+              题目Flag：
+            </span>
+            <span>
+              <input class="form-control" type="text" name="chall_flag" onblur="render()"
+                placeholder="flag{xxxxxxxxxx}">
+            </span>
+          </div>
+          <div id="settype" onblur="render()">
+            <span>
+              题目类型：
+            </span>
+            <span>
+              <label> <input type="radio" name="chall_type" value="Misc" checked /> Misc </label>
+              <label> <input type="radio" name="chall_type" value="Web" /> Web </label>
+              <label> <input type="radio" name="chall_type" value="Pwn" /> Pwn </label>
+            </span>
+          </div>
+          <div id="setfile">
+            <span>
+              <label for="file">上传文件：</label>
+              <input type="file" name="chall_file" id="file" onblur="render()">
+            </span>
+          </div>
+
+          <button type="submit" id="Sbmit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+    </div>
+    <div class="Box-body">你这里空空如也啊</div>
+  </div>
+
+
+  <script>
+    $(document).ready(function () {
+      if ($.cookie("salt") == undefined) {
+        window.alert("error 3");
+        window.location.href = "index.html";
+      }
+      else {
+        var id = $.cookie("salt").substring(0, 32);
+        $.ajax({
+          url: "team.php",
+          type: "GET",
+          async: false,
+          dataType: "json",
+          data: {
+            id: id
+          },
+          success: function (response) {
+            console.log(response);
+            $.each(response, function (m1, m2) {
+              if (m2 != "__ADMIN__" && m1 === 0) {
+                window.location = "index.html";
+              }
+            })
+          },
+          error: function () {
+            window.alert("error:1");
+          }
+        })
+      }
+      $("form").ajaxForm(function (data) {
+        console.log(data);
+        console.log("str:" + JSON.stringify(data));
+        switch (error) {
+          case 0:
+            
+            break;
+        
+          default:
+            break;
+        }
+      }
+      );
+      $("#returnindex").click(function () {
+        window.location.href = "index.html";
+      })
+      $("#submitchallenge").click(function () {
+        $(".upchallenge").toggle();
+      })
+      render();
+
+    })
+    document.onkeydown = function (event) {
+      var target, code, tag;
+      if (!event) {
+        event = window.event; //针对ie浏览器
+        target = event.srcElement;
+        code = event.keyCode;
+        if (code == 13) {
+          tag = target.tagName;
+          if (tag == "TEXTAREA") { return true; }
+          else { return false; }
+        }
+      }
+      else {
+        target = event.target;
+        code = event.keyCode;
+        if (code == 13) {
+          tag = target.tagName;
+          if (tag == "INPUT") { return false; }
+          else { return true; }
+        }
+      }
+    };
+    function render() {
+      $(".challengename").text($("#chaname").val());
+      $(".challengedisc").text($("#area").val());
+      $(".score").text($("#chascore").val());
+    }
+  </script>
+</body>
+
+</html>

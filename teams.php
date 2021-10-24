@@ -15,6 +15,6 @@ else{
             array_push($result,$row);
         }
     }
-    var_dump(json_encode($result));
+    exit(json_encode($result));
 }
 ?>

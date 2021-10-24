@@ -183,21 +183,52 @@ function director(val, flag, re) {
         case 103:
             if (val != 0) {
                 var psswd = "" + val;
-                nam = $.cookie("salt").substring(0, 31);
+                nam = $.cookie("salt").substring(0, 32);
                 if (hex_md5(psswd) == passwdn) {
                     $.ajax({
                         url: "settings.php",
                         type: "GET",
                         async: false,
                         data: {
+<<<<<<< HEAD
 
+=======
+                            id: nam,
+                            password: passwd,
+                            newpassword: passwdn
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if (response == "Wrong.") {
+                                re.content = "出错了，但一定是你的错qwq，重新再来吧，新密码？";
+                                re.flag = 100;
+                                return;
+
+                            } else {
+                                $.removeCookie('salt');
+                                re.content = "成功";
+                                re.flag = 12;
+                                window.location.reload();
+                                return;
+                            }
+                            return;
+                        },
+                        error: function () {
+                            window.alert("error: 1")
+                            return;
+>>>>>>> b4f41ecd9865bf618439ba76680d70f1276f4d01
                         }
 
                     })
                 }
+                else {
+                    re.content = "出错了，但一定是你的错qwq，重新再来吧，新密码？";
+                    re.flag = 100;
+                    return;
+                }
             } else {
-                re.content = "";
-                re.flag = 102;
+                re.content = "出错了，但一定是你的错qwq，重新再来吧，新密码？";
+                re.flag = 100;
                 return;
             }
             break;
@@ -225,8 +256,7 @@ function typing(ipt, time) {
         $(".push").removeAttr("disabled");
         $(ipt).keypress(function (event) {
             if (
-                event.keyCode == 13 &&
-                "disabled" != $(ipt).parent().find(".push").attr("disabled")
+                event.keyCode == 13 && "disabled" != $(ipt).parent().find(".push").attr("disabled")
             ) {
                 $(ipt).parent().find(".push").trigger("click");
             }
