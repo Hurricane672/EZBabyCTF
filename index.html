@@ -167,9 +167,6 @@
   </div>
   <script>
     $(document).ready(function () {
-      $(".Header-link").click(function () {
-        $(".marsk-container").show();
-      })
       $(".marsk-container").click(function () {
         $(".marsk-container").hide();
         $(".popwindow").hide();
@@ -259,6 +256,7 @@
           return;
         }
         $("#changepass").show();
+        nedmsak();
         typing("#changepassipt", 2000);
 
       })
@@ -288,15 +286,13 @@
     });
     function signp() {
       $("#signup").show();
+      nedmsak();
       typing("#signupipt", 4600);
     }
     function signi() {
       $("#signin").show();
+      nedmsak();
       typing("#signinipt", 2000);
-    }
-    function closesign() {
-      $(".popwindow").hide();
-      $(".marsk-container").hide();
     }
 
   </script>

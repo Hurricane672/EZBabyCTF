@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/primer.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/basic.css" />
-    <style>
-      .note {
-        width: 1024px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        font-size: large;
-        font-weight: bold;
-      }
-    </style>
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    <title>EZBabyCTF-Notification</title>
-  </head>
-  <body>
-    <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
-      <div class="Header-item m-auto">
-        <span id="Head">EZBabyCTF通知</span>
-      </div>
-      <div class="Header-item m-3">
-        <span class="Header-link" onclick="toteam()">战队 </span>
-      </div>
-      <div class="Header-item m-3">
-        <span class="Header-link" onclick="returnindex()">返回首页</span>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/basic.css" />
+  <style>
+    .note {
+      width: 1024px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: large;
+      font-weight: bold;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <title>EZBabyCTF-Notification</title>
+</head>
+
+<body>
+  <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
+    <div class="Header-item m-auto">
+      <span id="Head">EZBabyCTF通知</span>
     </div>
-    <div class="Box anim-fade-in note">
-      <div class="Box-header">Notifications</div>
-      <div class="Box-body">你这里空空如也啊</div>
+    <div class="Header-item m-3">
+      <span class="Header-link" onclick="toteam()">战队 </span>
     </div>
-    <script>
-      function returnindex() {
+    <div class="Header-item m-3">
+      <span class="Header-link" onclick="returnindex()">返回首页</span>
+    </div>
+  </div>
+  <div class="Box anim-fade-in note">
+    <div class="Box-header">Notifications</div>
+    <div class="Box-body">你这里空空如也啊</div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      if ($.cookie("salt") == undefined) {
+        window.alert("error 3");
         window.location.href = "index.html";
       }
-      function toteam() {
-        window.location.href = "team.html";
-      }
-    </script>
-  </body>
+    });
+    function returnindex() {
+      window.location.href = "index.html";
+    }
+    function toteam() {
+      window.location.href = "teams.html";
+    }
+  </script>
+</body>
+
 </html>

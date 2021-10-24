@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/primer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/basic.css" />
+    <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="Js/mask.js"></script>
+
+    <title>EZBabyCTF-team</title>
+    <style>
+        .team {
+            width: 1024px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .Box-row {
+            position: relative;
+            height: 8vh;
+            text-align: left;
+            padding-left: 30%;
+        }
+        #scoreboard{
+            z-index: 5;
+            
+        }
+
+        #setnewtm {
+            position: absolute;
+            top: 35px;
+            right: -15%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="Header" style="background-color: rgba(0, 0, 0, 0.826)">
+        <div class="Header-item m-auto">
+            <span id="Head">EZBabyCTF队伍</span>
+        </div>
+        <div class="Header-item m-3">
+            <span class="Header-link" id="notif">通知 </span>
+        </div>
+        <div class="Header-item m-3">
+            <span class="Header-link" id="returnindex">返回首页</span>
+        </div>
+    </div>
+    <div class="marsk-container"></div>
+    <div id="scoreboard"></div>
+    <div class="Box anim-fade-in team" style="position: relative;">
+        <button class="btn-mktg btn-primary-mktg mr-3" id="setnewtm" type="button">管理我的战队</button>
+        <div class="Box-header">战队</div>
+        <div class="Box-row">Box row using a div</div>
+
+
+    </div>
+
+    <div class="popwindow" id="setnwtm">
+        <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px;">
+            <div class="Box-header">
+                <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+                    <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+                        <path fill-rule="evenodd"
+                            d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+                        </path>
+                    </svg>
+                </button>
+                <h3 class="Box-title">EZBabyCTF战队创建</h3>
+            </div>
+
+            <div class="Box-footer">
+                <div><strong>请输入您要创建的战队名</strong> </div>
+                <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="setnewtipt" />
+                <button type="button" class="btn btn-block" id="addnew">确定</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            if ($.cookie("salt") == undefined) {
+                window.alert("error 3");
+                window.location.href = "index.html";
+            }
+            else {
+                var id = $.cookie("salt").substring(0, 32);
+                $.ajax({
+                    url: "team.php",
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        publish(response);
+                    },
+                    error: function () {
+                        window.alert("error:1");
+                    }
+                })
+            }
+        })
+        function publish(response) {
+            $(".Box-header").text(response[0]);
+            for (let i = 2; i < response.length; i++) {
+                $(".Box").append("<div class=Box-row>"+response[i]+"</div>")
+            }
+        }
+    </script>
+</body>
+
+</html>

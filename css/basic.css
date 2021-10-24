@@ -120,3 +120,6 @@ body {
 .logout{
   display: none;
 }
+.errorhps {
+  background-color:rgba(255, 0, 0, 0.685);
+}
