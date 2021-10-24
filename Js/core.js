@@ -187,10 +187,10 @@ function director(val, flag, re) {
                 if (hex_md5(psswd) == passwdn) {
                     $.ajax({
                         url: "settings.php",
-                        type:"GET",
-                        async:false,
-                        data:{
-                            
+                        type: "GET",
+                        async: false,
+                        data: {
+
                         }
 
                     })

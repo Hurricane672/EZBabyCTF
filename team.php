@@ -10,11 +10,11 @@ if($conn->connect_error){
 else{
     //isset($_GET["tname"])&&
     //
-    if (isset($_GET["name"])) {
+    if (isset($_GET["id"])) {
         //$tname=$_GET["tname"];
-        $name=$_GET["name"];
+        $name=$_GET["id"];
         //$s = "select team from ".$tb." where name=\"".$name."\" and captain=\"".$captain."\" active=\"1\"";
-        $s = "select team from ".$tb." where name=\"".$name."\"";
+        $s = "select team from ".$tb." where id=\"".$id."\"";
         $r1 = $conn->query($s);
         $tname = mysqli_fetch_row($r1)[0];
         //echo $tname;
