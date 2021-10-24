@@ -190,9 +190,6 @@ function director(val, flag, re) {
                         type: "GET",
                         async: false,
                         data: {
-<<<<<<< HEAD
-
-=======
                             id: nam,
                             password: passwd,
                             newpassword: passwdn
@@ -216,7 +213,6 @@ function director(val, flag, re) {
                         error: function () {
                             window.alert("error: 1")
                             return;
->>>>>>> b4f41ecd9865bf618439ba76680d70f1276f4d01
                         }
 
                     })
