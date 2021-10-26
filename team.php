@@ -20,7 +20,7 @@ else{
         //echo $tname;
         $s3 = "select captain from teams where tname=\"".$tname."\"";
         $r3 = $conn->query($s3);
-        $captain = md5(mysqli_fetch_row($r3)[0]);
+        $captain = mysqli_fetch_row($r3)[0];
         //mysqli_affected_rows($conn)==1
         if($id===$captain){
             $s1="select name from users where team=\"".$tname."\"";
@@ -37,7 +37,7 @@ else{
                 }
             }
 
-            var_dump(json_encode($result));
+            exit(json_encode($result));
         }
         else{
             $s1="select name from users where team=\"".$tname."\"";

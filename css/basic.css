@@ -123,3 +123,7 @@ body {
 .errorhps {
   background-color:rgba(255, 0, 0, 0.685);
 }
+.successhps {
+  background-color:rgba(9, 255, 0, 0.685);
+}
+

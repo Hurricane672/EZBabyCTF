@@ -8,9 +8,9 @@ if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["tname"])&&isset($_GET["name"])){
+    if(isset($_GET["tname"])&&isset($_GET["id"])){
         $tname = $_GET["tname"];
-        $captain = $_GET["name"];
+        $captain = $_GET["id"];
         $id = md5($tname);
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where tname=\"".$tname."\" and active=\"1\"";
@@ -31,7 +31,7 @@ else{
                 $conn->query($s3);
                 echo $s3;
                 if(mysqli_affected_rows($conn)!=-1){
-                    $s4="update users team=\"".$tname."\" where name=".$name ;
+                    $s4="update users set team=\"".$tname."\" where id=\"".$captain."\"" ;
                     $conn->query($s4);
                     echo $s4;
                     if(mysqli_affected_rows($conn)!=-1){

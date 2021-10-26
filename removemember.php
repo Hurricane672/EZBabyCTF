@@ -8,9 +8,9 @@ if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["tname"])&&isset($_GET["name"])&&isset($_GET["rmname"])){
+    if(isset($_GET["tname"])&&isset($_GET["id"])&&isset($_GET["rmname"])){
         $tname = $_GET["tname"];
-        $captain = $_GET["name"];
+        $captain = $_GET["id"];
         $rmname = $_GET["rmname"];
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where tname=\"".$tname."\" and captain=\"".$captain."\" active=\"1\"";
