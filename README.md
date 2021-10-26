@@ -16,7 +16,7 @@
 
 拟在此基础上添加WP展示和题目讨论功能，目前尚未形成一致意见。
 
-![image-20211008113201250](attaches/1)
+![image-20211008113201250](attaches/1.jpg)
 
 ## 2. 项目详细设计
 
@@ -38,7 +38,6 @@ EZBabyCTF$ tree -L 3
 ├── acceptinvite.php
 ├── add.html
 ├── admin
-│   ├── add.html
 │   └── add.php
 ├── attaches
 │   ├── 1.jpg
@@ -118,6 +117,7 @@ EZBabyCTF$ tree -L 3
 ├── team.php
 ├── teams.html
 ├── teams.php
+├── admin.html
 └── test.php
 ```
 
@@ -335,7 +335,7 @@ $(document).ready(function () {})
 ​		使用jQuery提供的加载函数优于JavaScript的`window.onload=function(){}`原因如下：
 
 			1. `window.onload=function(){}`不能同时写多个，后面的将会覆盖前面的。
-   			2. `window.onload=function(){}`在页面所有元素（包括图片，引用文件）加载完后执行。
+			2. `window.onload=function(){}`在页面所有元素（包括图片，引用文件）加载完后执行。
 
 
 
@@ -366,7 +366,8 @@ $(document).ready(function () {})
 
   ```javascript
   // 这里使用的是直接在 admin.html 文件上加验证，不再在 index.html 上验证，避免用户直接通过url进行跳转
-  // 所以这个功能已经作废。现在的网页上任何登录的用户能看到 "出题" 一按钮但是点击进入后会被重定向回 index.html
+  // 使用cookie保存管理员信息以为着管理员权限容易受到CSRF攻击。改用admin页面中用ajax方法检查用户权限
+  // 这个功能已经作废。现在的网页上任何登录的用户能看到 "出题" 一按钮但是点击进入后会被重定向回 index.html
   // 实现代码详情见 2.5.3 admin.html
   ```
 
@@ -614,4 +615,46 @@ var ret = {
 ```
 
 - `typing(ipt,speed)`这是打印特效需要的函数，会根据正在工作的弹窗（用参数ipt标出）和打印速度对具有`class="text-js"`属性的HTML元素施加打印特效。
+
+  `typing`函数有一个重要的问题：当用户输入过快时会导致打印函数目标丢失，这与上面的点击按钮事件函数调用时的标签操作有关。但由于typing动画无法终止或跳过，因此保留目标丢失的bug转而选择在打印时禁用输入，如下：
+
+```javascript
+function typing(ipt, time) {
+    $(".push").attr("disabled", "disabled");
+    autoType(
+        "#" + $(ipt).parent().parent().find(".type-js").attr("id"),
+        50
+    );
+    setTimeout(() => {
+        $(".push").removeAttr("disabled");
+        $(ipt).keypress(function (event) {
+            if (
+                event.keyCode == 13 &&
+                "disabled" != $(ipt).parent().find(".push").attr("disabled")
+            ) {
+                $(ipt).parent().find(".push").trigger("click");
+            }
+        });
+    }, time);
+}
+```
+
+
+
+`typing`和`director`函数位于文件`core.js`中，这个文件里面包含了登录注册所需的重要函数，也是index页的核心函数。
+
+其中的具体提将在后面注册功能中说明
+
+`typing`函数中调用的是来自[Auto Typing Text (function) (codepen.io)](https://codepen.io/ConnorGaunt/pen/OReXZB/)作者[Connor Gaunt](https://twitter.com/Connor_Gaunt)详情请访问链接。是通过jQuery写成的。其基本实现方式是给需要打印的HTML元素加上`class="text-js"`的标签，在触发函数时能够执行打印函数。
+
+- ！需要注意的是打印函数触发之前元素也本身存在，因此在上文中的`.push`函数中有许多`settimeout()`函数用于调节。
+- ！在打印的过程中如果再次触发`.push`触发写入的情况会导致打印函数丢失打印目标报错为：
+
+```javascript
+Uncaught TypeError: Cannot read property ‘text-js‘ of undefined
+```
+
+
+
+
 
