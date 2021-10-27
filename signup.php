@@ -34,7 +34,7 @@ else{
         $name = urldecode($_GET["name"]);
         $password = urldecode($_GET["password"]);
         if (!check($name)||!check($password)) {
-            die("Invalid call.");
+            die("Invalid call.");}
         $id = md5($name);
         $team = "__NONE__";
         $s2 = "insert into ".$tb." (`id`,`name`,`team`,`password`) values (\"".$id."\",\"".$name."\",\"".$team."\",\"".$password."\");";
