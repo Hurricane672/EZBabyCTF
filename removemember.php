@@ -15,7 +15,7 @@ else{
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where tname=\"".$tname."\" and captain=\"".$captain."\" active=\"1\"";
         $conn->query($s1);
-        if(mysqli_affected_rows($conn)!=0){
+        if(mysqli_affected_rows($conn)!=0&&$rmname!==$captain){
             $s2 = "update users team=\"__NONE__\" where name=".$rmname;
             $conn->query($s2);
             echo $s2;
