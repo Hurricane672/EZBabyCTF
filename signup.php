@@ -1,4 +1,14 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -9,7 +19,7 @@ if($conn->connect_error){
 }
 else{
     if(isset($_GET["flag"])&&isset($_GET["name"])){
-        $name = $_GET["name"];
+        $name = urldecode($_GET["name"]);
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where name=\"".$name."\"";
         $conn->query($s1);
@@ -21,8 +31,10 @@ else{
         }
     }
     elseif(isset($_GET["name"])&&isset($_GET["password"])){
-        $name = $_GET["name"];
-        $password = $_GET["password"];
+        $name = urldecode($_GET["name"]);
+        $password = urldecode($_GET["password"]);
+        if (!check($name)||!check($password)) {
+            die("Invalid call.");}
         $id = md5($name);
         $team = "__NONE__";
         $s2 = "insert into ".$tb." (`id`,`name`,`team`,`password`) values (\"".$id."\",\"".$name."\",\"".$team."\",\"".$password."\");";
