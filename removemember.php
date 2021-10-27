@@ -18,7 +18,6 @@ else{
         if(mysqli_affected_rows($conn)!=0&&$rmname!==$captain){
             $s2 = "update users team=\"__NONE__\" where name=".$rmname;
             $conn->query($s2);
-            echo $s2;
             if(mysqli_affected_rows($conn)!=-1){
                 echo "done";
             }
