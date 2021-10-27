@@ -1,4 +1,13 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -9,9 +18,12 @@ if($conn->connect_error){
 }
 else{
     if(isset($_GET["tname"])&&isset($_GET["id"])&&isset($_GET["rmname"])){
-        $tname = $_GET["tname"];
-        $captain = $_GET["id"];
-        $rmname = $_GET["rmname"];
+        $tname = urldecode($_GET["tname"]);
+        $captain = urldecode($_GET["id"]);
+        $rmname = urldecode($_GET["rmname"]);
+        if(!check($tname)||!check($captain)||!check($rmname)){
+            die("Invalid call.");
+        }
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where tname=\"".$tname."\" and captain=\"".$captain."\" active=\"1\"";
         $conn->query($s1);
