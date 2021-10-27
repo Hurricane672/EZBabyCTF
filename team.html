@@ -29,11 +29,13 @@
             text-align: left;
             padding-left: 20%;
         }
-        #ldicon{
+
+        #ldicon {
             position: absolute;
             top: 75px;
             left: 15%;
         }
+
         #scoreboard {
             z-index: 5;
             height: 160px;
@@ -53,7 +55,7 @@
             display: none;
         }
 
-        #rmteam:hover{
+        #rmteam:hover {
             background-color: var(--color-scale-red-4);
         }
     </style>
@@ -149,9 +151,13 @@
                 newpl.append("<input type='text' class='form-control' style='width: 95%; margin: 2vh' id='nmtorm' />");
                 newpl.append("<button type='button' class='btn btn-block' onclick='yestormnm()'>确定</button>");
             })
-            // $("#rmteam").click(function () {
-                
-            // })
+            $("#rmteam").click(function () {
+                var newpl = $("#reassure");
+                newpl.find("button").css("display", "none");
+                newpl.append("<div><strong>确定要解散队伍？</strong> </div>");
+                newpl.append("<button type='button' class='btn btn-block' onclick='yestodel()'>确定</button>");
+                newpl.append("<button type='button' class='btn btn-block' onclick='closesign()'>取消</button>");
+            })
         })
         function publish(response) {
             if (response[0] == '__ADMIN__') {
@@ -211,6 +217,30 @@
                 })
 
             }
+        }
+        function yestodel() {
+            var id = $.cookie("salt").substring(0, 32);
+            var teamnam = $("#publishpl").text();
+            $.ajax({
+                url: "removeteam.php",
+                type: "GET",
+                async: false,
+                data: {
+                    tname: teamnam,
+                    id: id
+                },
+                success: function (response) {
+                    if (response == 'done') {
+                        window.alert("解散成功！");
+                        window.location.href = "index.html";
+                    } else {
+                        window.alert("解散失败。");
+                    }
+                },
+                error: function () {
+                    window.alert("error:1");
+                }
+            })
         }
     </script>
 </body>

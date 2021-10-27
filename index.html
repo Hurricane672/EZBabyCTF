@@ -205,19 +205,22 @@
           content: "",
           flag: 0
         };
+        director(app, flag, ret);
         setTimeout(function () {
-          director(app, flag, ret);
           toappd.removeAttr("class");
           toappd.append("<p class='text-js'>>" + ret.content + "<p/>");
           flag = ret.flag;
           typing(doing, 4000);
         }, 1000);
         $(doing).val("");
-        if (flag == 12) {
-          setTimeout(() => {
+        setTimeout(() => {
+          if (flag == 12) {
+
             window.location.reload();
-          }, 2000);
-        }
+
+          }
+        }, 3000);
+
       });
       $(".submittingbtn").click(function () {
         submitFlag(1);

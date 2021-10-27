@@ -24,16 +24,16 @@ else{
             $s2="insert into teams (`id`,`tname`,`captain`) values (\"".$id."\",\"".$tname."\",\"".$captain."\");";
             
             $conn->query($s2);
-            echo $s2;
+            
             if(mysqli_affected_rows($conn)!=-1){
                 $score = 0;
                 $s3="insert into scoreboard (`id`,`tname`,`score`) values (\"".$id."\",\"".$tname."\",\"".$score."\");";
                 $conn->query($s3);
-                echo $s3;
+                
                 if(mysqli_affected_rows($conn)!=-1){
                     $s4="update users set team=\"".$tname."\" where id=\"".$captain."\"" ;
                     $conn->query($s4);
-                    echo $s4;
+                    
                     if(mysqli_affected_rows($conn)!=-1){
                         exit("done");
                     }

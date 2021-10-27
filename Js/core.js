@@ -136,14 +136,14 @@ function director(val, flag, re) {
                 },
                 success: function (response) {
                     console.log(response);
-                    if (response == "Wrong name or password.") {
-                        re.content = "哎呀，是你记错了还是我认错了？从用户名重新开始写吧";
-                        re.flag = 10;
+                    if (response == "Successfully sign in!") {
+                        re.content = "loading……";
+                        re.flag = 12;
                         return;
 
                     } else {
-                        re.content = nam;
-                        re.flag = 12;
+                        re.content = "哎呀，是你记错了还是我认错了？从用户名重新开始写吧";
+                        re.flag = 10;
                         return;
                     }
                     return;
