@@ -29,7 +29,11 @@
             text-align: left;
             padding-left: 20%;
         }
-
+        #ldicon{
+            position: absolute;
+            top: 75px;
+            left: 15%;
+        }
         #scoreboard {
             z-index: 5;
             height: 160px;
@@ -47,6 +51,10 @@
             top: 35px;
             right: -15%;
             display: none;
+        }
+
+        #rmteam:hover{
+            background-color: var(--color-scale-red-4);
         }
     </style>
 </head>
@@ -69,6 +77,11 @@
     <div class="Box anim-fade-in team" id="memberlist" style="position: relative;">
         <button class="btn-mktg btn-primary-mktg mr-3" id="settm" type="button">管理我的战队</button>
         <div class="border rounded-1 color-shadow-medium p-4" id="scoreboard"></div>
+        <svg id="ldicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path
+                d="M12 2.5a5.25 5.25 0 00-2.519 9.857 9.005 9.005 0 00-6.477 8.37.75.75 0 00.727.773H20.27a.75.75 0 00.727-.772 9.005 9.005 0 00-6.477-8.37A5.25 5.25 0 0012 2.5z">
+            </path>
+        </svg>
         <div class="Box-header" id="publishpl">战队</div>
 
 
@@ -136,6 +149,9 @@
                 newpl.append("<input type='text' class='form-control' style='width: 95%; margin: 2vh' id='nmtorm' />");
                 newpl.append("<button type='button' class='btn btn-block' onclick='yestormnm()'>确定</button>");
             })
+            // $("#rmteam").click(function () {
+                
+            // })
         })
         function publish(response) {
             if (response[0] == '__ADMIN__') {
@@ -162,8 +178,39 @@
             }
         }
         function yestormnm() {
+            var id = $.cookie("salt").substring(0, 32);
+            var teamnam = $("#publishpl").text();
             var torm = $("#nmtorm").val();
-            console.log(torm);
+
+            var text = torm.trim().split(' ');
+            console.log(text);
+            for (let i = 0; i < text.length; i++) {
+                name = text[i];
+                if (name == ' ' || name == '') {
+                    continue;
+                }
+                $.ajax({
+                    url: "removemember.php",
+                    type: "GET",
+                    async: false,
+                    data: {
+                        tname: teamnam,
+                        id: id,
+                        rmname: name
+                    },
+                    success: function (response) {
+                        if (response == 'done') {
+                            window.alert("移除成功！");
+                        } else {
+                            window.alert("移除失败！:用户名为：" + name + "请检查一下");
+                        }
+                    },
+                    error: function () {
+                        window.alert("error:1");
+                    }
+                })
+
+            }
         }
     </script>
 </body>
