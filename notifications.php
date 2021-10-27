@@ -1,4 +1,13 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -9,7 +18,10 @@ if($conn->connect_error){
 }
 else{
     if(isset($_GET["name"])){
-        $name=$_GET["name"];
+        $name=urldecode($_GET["name"]);
+        if (!check($name)) {
+            die("Invalid call.");
+        }
         $s1 = "select from,to,message from notifications where to=\"".$name."\";";
         $result = array();
         if ($r = $conn->query($s1)) {

@@ -20,6 +20,9 @@ if($conn->connect_error){
 else{
     if(isset($_GET["flag"])&&isset($_GET["name"])){
         $name = urldecode($_GET["name"]);
+        if(!check($name)){
+            exit("false");
+        }
         mysqli_query($conn,"SET NAMES UTF8");
         $s1 = "select * from ".$tb." where name=\"".$name."\"";
         $conn->query($s1);

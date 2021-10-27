@@ -1,4 +1,13 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -9,8 +18,11 @@ if($conn->connect_error){
 }
 else{
     if(isset($_GET["name"])&&isset($_GET["password"])){
-        $name = $_GET["name"];
-        $password = $_GET["password"];
+        $name = urldecode($_GET["name"]);
+        $password = urldecode($_GET["password"]);
+        if (!check($name)||!check($password)) {
+            die("Invalid call.");
+        }
         $s2 = "select * from ".$tb." where name=\"".$name."\" and password=\"".$password."\"";
         //echo $s2;
         $conn->query($s2);

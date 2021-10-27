@@ -1,4 +1,13 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -52,3 +61,4 @@ else{
     }
 }
 //http://192.168.64.129/removeteam.php?tname=1&name=1
+?>

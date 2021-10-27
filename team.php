@@ -1,4 +1,13 @@
 <?php
+function check($str)
+{
+    if (!strstr($str,'!')&&!strstr($str,'@')&&!strstr($str,'#')&&!strstr($str,'$')&&!strstr($str,'%')&&!strstr($str,'^')&&!strstr($str,'&')&&!strstr($str,'*')&&!strstr($str,'(')&&!strstr($str,')')&&!strstr($str,'-')&&!strstr($str,'_')&&!strstr($str,'=')&&!strstr($str,'+')&&!strstr($str,'[')&&!strstr($str,']')&&!strstr($str,'"')&&!strstr($str,'\'')&&!strstr($str,';')&&!strstr($str,'<')&&!strstr($str,'>')&&!strstr($str,'?')&&!strstr($str,'`')&&!strstr($str,'~')&&!strstr($str,'\\')&&!strstr($str,'/')&&!strstr($str,'|')) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -12,7 +21,10 @@ else{
     //
     if (isset($_GET["id"])) {
         //$tname=$_GET["tname"];
-        $id=$_GET["id"];
+        $id=urldecode($_GET["id"]);
+        if(!check($id)){
+            die("Invalid call.");
+        }
         //$s = "select team from ".$tb." where name=\"".$name."\" and captain=\"".$captain."\" active=\"1\"";
         $s = "select team from ".$tb." where id=\"".$id."\"";
         $r1 = $conn->query($s);
