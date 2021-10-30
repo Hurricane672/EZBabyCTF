@@ -150,6 +150,12 @@
                 newpl.append("<div><strong>请输入您要踢的人的用户名(多人请用空格分开)</strong> </div>");
                 newpl.append("<input type='text' class='form-control' style='width: 95%; margin: 2vh' id='nmtorm' />");
                 newpl.append("<button type='button' class='btn btn-block' onclick='yestormnm()'>确定</button>");
+                $("#nmtorm").keypress(function (event) {
+                    if (
+                        event.keyCode == 13) {
+                        yestormnm();
+                    }
+                });
             })
             $("#rmteam").click(function () {
                 var newpl = $("#reassure");
@@ -189,7 +195,6 @@
             var torm = $("#nmtorm").val();
 
             var text = torm.trim().split(' ');
-            console.log(text);
             for (let i = 0; i < text.length; i++) {
                 name = text[i];
                 if (name == ' ' || name == '') {
@@ -207,7 +212,11 @@
                     success: function (response) {
                         if (response == 'done') {
                             window.alert("移除成功！");
-                        } else {
+                        }
+                        else if (response == 'NO') {
+                            window.alert("不能移除自己，要不直接散伙？");
+                        }
+                        else {
                             window.alert("移除失败！:用户名为：" + name + "请检查一下");
                         }
                     },

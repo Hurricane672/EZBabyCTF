@@ -17,7 +17,7 @@ if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["tname"])&&isset($_GET["name"])){
+    if(isset($_GET["tname"])&&isset($_GET["id"])){
         $tname = urldecode($_GET["tname"]);
         $id = urldecode($_GET["id"]);
         if(!check($tname)||!check($id)){

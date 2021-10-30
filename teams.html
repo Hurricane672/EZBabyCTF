@@ -30,22 +30,21 @@
 
     .tmname {
       position: absolute;
-      left: 15%;
+      left: 20%;
+      overflow: hidden;
     }
 
     .tmscore {
       position: absolute;
-      left: 45%;
+      left: 50%;
+      overflow: hidden;
     }
 
-    .tmcapt {
-      position: absolute;
-      left: 70%;
-    }
 
     .jointm {
       position: absolute;
       left: 90%;
+      overflow: hidden;
     }
 
     #setnewtm {
@@ -77,11 +76,8 @@
     <div class="Box-row">
       <span class="tmname">队伍名称</span>
       <span class="tmscore">队伍分数</span>
-      <span class="tmcapt">队长</span>
       <span class="jointm">加入队伍</span>
     </div>
-    <div class="Box-row">Box row using a div</div>
-
 
   </div>
 
@@ -102,6 +98,26 @@
         <div><strong>请输入您要创建的战队名</strong> </div>
         <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="setnewtipt" />
         <button type="button" class="btn btn-block" id="addnew">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popwindow" id="reassurejoin">
+    <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px;">
+      <div class="Box-header">
+        <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+          <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+            <path fill-rule="evenodd"
+              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+            </path>
+          </svg>
+        </button>
+        <h3 class="Box-title">EZBabyCTF战队</h3>
+      </div>
+      <div class="Box-row"><strong id="tmn">您确定要加入</strong></div>
+      <div class="Box-footer">
+        <button type="button" class="btn btn-block" id="sur" onclick="yestojoin()">确定</button>
+        <button type="button" class="btn btn-block" id="can" onclick="closesign()">取消</button>
       </div>
     </div>
   </div>
@@ -134,15 +150,36 @@
           }
         })
       }
+      $.ajax({
+        url: "scoreboard.php",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        success: function (response) {
+          var toappdf = $(".team");
+          var join = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M19.25 1a.75.75 0 01.75.75V4h2.25a.75.75 0 010 1.5H20v2.25a.75.75 0 01-1.5 0V5.5h-2.25a.75.75 0 010-1.5h2.25V1.75a.75.75 0 01.75-.75zM9 6a3.5 3.5 0 100 7 3.5 3.5 0 000-7zM4 9.5a5 5 0 117.916 4.062 7.973 7.973 0 015.018 7.166.75.75 0 11-1.499.044 6.469 6.469 0 00-12.932 0 .75.75 0 01-1.499-.044 7.973 7.973 0 015.059-7.181A4.993 4.993 0 014 9.5z"></path></svg></button>';
+          console.log(response);
+          $.each(response, function (m1, m2) {
+            console.log(m2[0], m2[1]);
+            toappdf.append('<div class="Box-row"><span class="tmname">' + m2[0] + '</span><span class= "tmscore" >' + m2[1] + '</span ><span span class="jointm" >' + '<button class="Box-btn-octicon btn-octicon jointmbt" id="' + m2[0] + '" type="button">' + join + '</span ></div>');
+          })
+        }
+      })
     })
     $(document).ready(function () {
       $("#setnewtm").click(
         function () {
-          $(".popwindow").show();
+          $("#setnwtm").show();
           $(".marsk-container").show();
+          $("#setnewtipt").keypress(function (event) {
+            if (
+              event.keyCode == 13) {
+              $("#addnew").trigger("click");
+            }
+          });
         }
       )
-      $("#addnew").click(function () {
+      $("#addnew").click(function cret() {
         var teamname = $("#setnewtipt").val();
         if (teamname == "") {
           $("#setnewtipt").attr("class", "errorhps");
@@ -176,7 +213,23 @@
       $("#tonotif").click(function () {
         window.location.href = "notifications.html";
       })
+      $(".jointmbt").click(function () {
+        var nametojoin = $(this).attr("id");
+        console.log(nametojoin);
+        $("#reassurejoin").show();
+        $("#setnwtm").hide();
+        $(".marsk-container").show();
+        $("#tmn").text("您确定要加入 " + nametojoin + " 战队吗？");
+      })
+
     })
+    function yestojoin() {
+      var tnme = $("#tmn").text();
+      tnme = tnme.trim().split(' ');
+      $.ajax({
+        
+      })
+    }
   </script>
 </body>
 
