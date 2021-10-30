@@ -11,28 +11,40 @@ function check($str)
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
-$tb = "notifications";
+$tb = "notifacations";
 $conn = new mysqli("localhost",$user,$passwd,$db);
 if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["id"])){
-        $name=urldecode($_GET["id"]);
-        if (!check($name)) {
+    if(isset($_GET["from"])&&isset($_GET["msg"])&&isset($_GET["to"])){
+        $from = urldecode($_GET["from"]);
+        $msg = urldecode($_GET["msg"]);
+        $to = urldecode($_GET["to"]);
+        if(!check($from)||!check($msg)||!check($to)){
             die("Invalid call.");
         }
-        $s1 = "select from,to,message from notifications where to=\"".$name."\";";
-        $result = array();
-        if ($r = $conn->query($s1)) {
-            while($row = mysqli_fetch_row($r)){
-                array_push($result,$row);
-            }
+        mysqli_query($conn,"SET NAMES UTF8");
+        $s1 = "insert into notifications (`from`,`to`,`message`) values (\"".$from."\",\"".$to."\",\"".$msg."\")";
+        //echo $s1;
+        $conn->query($s1);
+        if(mysqli_affected_rows($conn)!=0){
+            exit("done");
         }
-        var_dump(json_encode($result));
-    }
+        else{
+            die("Invalid call.");
+        }
+    }   
     else{
         die("Invalid call.");
     }
 }
+//http://192.168.64.129/message.php?from=1&msg=2&to=3
 ?>
+
+
+
+
+
+
+
