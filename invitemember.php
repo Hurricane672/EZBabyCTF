@@ -17,9 +17,9 @@ if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["tname"])&&isset($_GET["id"])&&isset($_GET["inname"])){
+    if(isset($_GET["tname"])&&isset($_GET["name"])&&isset($_GET["inname"])){
         $tname = urldecode($_GET["tname"]);
-        $captain = urldecode($_GET["id"]);
+        $captain = urldecode($_GET["name"]);
         $inname = urldecode($_GET["inname"]);
         if(!check($tname)||!check($captain)||!check($inname)){
             die("Invalid call.");
@@ -31,6 +31,7 @@ else{
             $mes = "\"The captain of ".$tname." who named ".$captain." invite you to join.\"";
             $s2 = "insert into notifications (`from`,`to`,`message`) values (\"".$captain."\",\"".$inname."\",".$mes.")";
             $conn->query($s2);
+            echo $s2;
             if(mysqli_affected_rows($conn)!=-1){
                 echo "done";
             }

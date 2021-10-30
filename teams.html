@@ -10,7 +10,6 @@
   <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <script src="Js/mask.js"></script>
-  <script src="Js/message.js"></script>
 
   <title>EZBabyCTF-team</title>
   <style>
@@ -227,23 +226,8 @@
     function yestojoin() {
       var tnme = $("#tmn").text();
       tnme = tnme.trim().split(' ');
-      tnme = tnme[1];
-      var id = $.cookie("salt").substring(0, 32);
       $.ajax({
-        url: "teams.php",
-        type: "GET",
-        async: false,
-        dataType: "json",
-        success: function (response) {
-          $.each(response, function (m1, m2) {
-            if (m2[1] == tnme) {
-              sendmsg(id,m2[2],"申请加入队伍");
-            }
-          })
-        },
-        error: function () {
-          window.alert("error:1");
-        }
+        
       })
     }
   </script>

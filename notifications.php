@@ -17,8 +17,8 @@ if($conn->connect_error){
     die("Connection faild.".$conn->connect_error);
 }
 else{
-    if(isset($_GET["id"])){
-        $name=urldecode($_GET["id"]);
+    if(isset($_GET["name"])){
+        $name=urldecode($_GET["name"]);
         if (!check($name)) {
             die("Invalid call.");
         }
