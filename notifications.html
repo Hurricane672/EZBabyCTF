@@ -67,7 +67,7 @@
   <div class="Box anim-fade-in note" id="noteapp">
     <div class="Box-header">Notifications</div>
     <div class="Box-row">
-      <span class="From">发送人</span>
+      <span class="From pophint">发送人</span>
       <span class="Content">内容</span>
       <span class="Reply">回复</span>
     </div>
@@ -137,7 +137,7 @@
         $(".replybtn").click(function () {
           var cont = $(this).parent().parent().find(".Content").text();
           var tosend = $(this).parent().parent().find(".From").text();
-          $("#replyhint").text(cont);
+          $("#replyhint").text("回复："+tosend+" : "+cont);
           $("#reply").show();
           $(".marsk-container").show();
           $("#sendmsg").click(function () {
@@ -186,9 +186,29 @@
 
               })
             }
-            $.ajax({
-              url: ""
-            })
+            else {
+              $.ajax({
+                url: "message.php",
+                type: "GET",
+                async: false,
+                dataType: "text",
+                data: {
+                  from: id,
+                  to: tosend,
+                  msg: msg
+                },
+                success: function (response) {
+                  if (response == 'done') {
+                    window.alert("消息已发出");
+                  } else {
+                    window.alert("怪了，出问题了，检查一下");
+                  }
+                },
+                error: function () {
+                  window.alert("error:1");
+                }
+              })
+            }
           })
         })
 
