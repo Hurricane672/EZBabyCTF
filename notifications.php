@@ -23,7 +23,7 @@ else{
             die("Invalid call.");
         }
         $s1 = "select `from`,`message` from `notifications` where `to`=\"".$name."\";";
-        echo $s1;
+        // echo $s1;
         $result = array();
         if ($r = $conn->query($s1)) {
             while($row = mysqli_fetch_row($r)){
