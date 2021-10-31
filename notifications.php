@@ -22,7 +22,7 @@ else{
         if (!check($name)) {
             die("Invalid call.");
         }
-        $s1 = "select from,to,message from notifications where to=\"".$name."\";";
+        $s1 = "select `from`,`message` from `notifications` where `to`=\"".$name."\";";
         echo $s1;
         $result = array();
         if ($r = $conn->query($s1)) {
@@ -36,4 +36,5 @@ else{
         die("Invalid call.");
     }
 }
+//http://192.168.64.129/notifications.php?name=3
 ?>
