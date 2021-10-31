@@ -70,24 +70,24 @@ if ($no_extension_name !== $_POST["chall_name"]) {
 	die("9");
 }
 
-if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && ($_FILES["chall_file"]["size"] < 204800) && in_array($extension, $allowedExts)) {
+if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && in_array($extension, $allowedExts)) {
 	if ($_FILES["chall_file"]["error"] > 0) {
 		// die("错误：: " . $_FILES["chall_file"]["error"] . "<br>");
 		die("5");
 	} else {
 		// echo ("------------------------");
-		$cmd = "find / -name " . $_POST["chall_type"];
+		$cmd = "find ../ -name " . $_POST["chall_type"];
 		$path = substr(shell_exec($cmd), 0, -1) . "/" . $_FILES["chall_file"]["name"];
 		// echo $cmd;
 
 		if (file_exists($path)) {
 			$str1 = shell_exec($cmd);
 			$str1 = str_replace("\n", "", $str1);
-			$cmd3="cd " . $str1. "&&rm -rf " . $_FILES["chall_file"]["name"] . " " . $no_extension_name;
+			$cmd3 = "cd " . $str1 . "&&rm -rf " . $_FILES["chall_file"]["name"] . " " . $no_extension_name;
 			// echo $cmd3;
 			shell_exec($cmd3);
 			move_uploaded_file($_FILES["chall_file"]["tmp_name"], $path);
-			echo("6" . "<br>");
+			echo ("6" . "<br>");
 		} else {
 			move_uploaded_file($_FILES["chall_file"]["tmp_name"], $path);
 			// echo "文件存储在: " . $path;
@@ -126,7 +126,7 @@ if (mysqli_affected_rows($conn) > 0) {
 	$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
 	// var_dump($sql3);
 	$conn->query($sql3);
-	echo("6" . "<br>");
+	echo ("6" . "<br>");
 
 	if ($conn->query($sql) === TRUE) {
 		// echo "<br>" . "success";

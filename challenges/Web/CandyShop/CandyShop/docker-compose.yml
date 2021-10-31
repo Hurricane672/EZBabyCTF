@@ -1,0 +1,8 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - "23500:3000"
+  db:
+    image: "mongo"
