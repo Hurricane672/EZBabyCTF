@@ -1,3 +1,0 @@
-# hiphop
-
-## Solution
