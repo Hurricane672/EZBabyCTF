@@ -29,9 +29,9 @@ else{
         $conn->query($s1);
         if(mysqli_affected_rows($conn)!=0){
             $mes = "\"The captain of ".$tname." who named ".$captain." invite you to join.\"";
-            $s2 = "insert into notifications (`from`,`to`,`message`) values (\"".$captain."\",\"".$inname."\",".$mes.")";
+            $s2 = "insert into notifications (`from`,`to`,`message`) values (\"".md5($captain)."\",\"".md5($inname)."\",".$mes.")";
             $conn->query($s2);
-            echo $s2;
+            // echo $s2;
             if(mysqli_affected_rows($conn)!=-1){
                 echo "done";
             }
@@ -49,10 +49,3 @@ else{
 }
 //http://192.168.64.129/removeteam.php?tname=1&name=1
 ?>
-
-
-
-
-
-
-

@@ -103,6 +103,7 @@
             </div>
             <div class="Box-row"><strong>你是打算？</strong> </div>
             <div class="Box-footer" id="reassure">
+                <button type="button" class="btn btn-block" id="addnm">我要邀请人</button>
                 <button type="button" class="btn btn-block" id="kickass">我要踢人</button>
                 <button type="button" class="btn btn-block" id="rmteam">解散我的战队</button>
             </div>
@@ -143,6 +144,19 @@
             $("#settm").click(function () {
                 $(".popwindow").show();
                 $(".marsk-container").show();
+            })
+            $("#addnm").click(function () {
+                var newpl = $("#reassure");
+                newpl.find("button").css("display", "none");
+                newpl.append("<div><strong>请输入您要邀请的人的用户名(多人请用空格分开)</strong> </div>");
+                newpl.append("<input type='text' class='form-control' style='width: 95%; margin: 2vh' id='nmtoadd' />");
+                newpl.append("<button type='button' class='btn btn-block' onclick='yestoaddnm()'>确定</button>");
+                $("#nmtoadd").keypress(function (event) {
+                    if (
+                        event.keyCode == 13) {
+                        yestoaddnm();
+                    }
+                });
             })
             $("#kickass").click(function () {
                 var newpl = $("#reassure");
@@ -187,6 +201,49 @@
                 if (response[1] == 'captain') {
                     $("#settm").show();
                 }
+            }
+        }
+        function yestoaddnm() {
+            var id = $.cookie("salt").substring(0, 32);
+            var teamnam = $("#publishpl").text();
+            var torm = $("#nmtoadd").val();
+            var text = torm.trim().split(' ');
+            for (let i = 0; i < text.length; i++) {
+                name = text[i];
+                if (name == ' ' || name == '') {
+                    continue;
+                }
+                $.ajax({
+                    url: "idtoname.php",
+                    type: "GET",
+                    async: false,
+                    data: {
+                        id: id,
+                    },
+                    success: function (cpname) {
+                        $.ajax({
+                            url: "invitemember.php",
+                            type: "GET",
+                            data: {
+                                tname: teamnam,
+                                name: cpname,
+                                inname: name
+                            },
+                            async: false,
+                            success: function (response) {
+                                if (response == 'done') {
+                                    window.alert("邀请已发出");
+                                } else {
+                                    window.alert("怪了，出问题了，检查一下");
+                                }
+                            }
+                        })
+                    },
+                    error: function () {
+                        window.alert("error:1");
+                    }
+                })
+
             }
         }
         function yestormnm() {

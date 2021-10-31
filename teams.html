@@ -189,6 +189,7 @@
           $.ajax({
             url: "createteam.php",
             type: "GET",
+            async: false,
             data: {
               tname: teamname,
               id: $.cookie("salt").substring(0, 32),
@@ -224,11 +225,58 @@
 
     })
     function yestojoin() {
+      var id = $.cookie("salt").substring(0, 32);
       var tnme = $("#tmn").text();
       tnme = tnme.trim().split(' ');
+      tnme = tnme[1];
       $.ajax({
-        
+        url: "idtoname.php",
+        async: false,
+        data: { id: id },
+        success: function (jonny) {
+          var hname = jonny;
+          $.ajax({
+            url: "teams.php",
+            async: false,
+            dataType: "json",
+            success: function (teaminfo) {
+              console.log(tnme);
+              $.each(teaminfo, function (m1, m2) {
+                if (m2[1] == tnme) {
+                  var cpname = m2[2];
+                  $.ajax({
+                    url: "message.php",
+                    async: false,
+                    data: {
+                      from: id,
+                      to: cpname,
+                      msg: hname + "wants to join your team."
+                    },
+                    success: function (res) {
+                      if (res == 'done') {
+                        window.alert("申请已发出！");
+                      } else {
+                        window.alert("出错！");
+                      }
+                    },
+                    error: function () {
+                      window.alert("error:1");
+                    }
+                  })
+                }
+              })
+
+            },
+            error: function () {
+              window.alert("error:1");
+            }
+          })
+        },
+        error: function () {
+          window.alert("error:1");
+        }
       })
+
     }
   </script>
 </body>
