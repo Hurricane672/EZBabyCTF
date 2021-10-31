@@ -126,4 +126,17 @@ body {
 .successhps {
   background-color:rgba(9, 255, 0, 0.685);
 }
+.Box-body{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.tname{
+  width: 350px;
+  text-indent: 5em;
+  overflow: hidden;
+  display: inline-block;
+}
+.tscore{
 
+  font-size: large;
+}

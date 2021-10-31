@@ -140,11 +140,13 @@
                 url: "team.php",
                 type: "GET",
                 async: false,
+                dataType: "json",
                 data: {
-                  id=tosend
+                  id: tosend
                 },
                 success: function (teaminfo) {
                   var tmname = teaminfo[0];
+                  console.log(tmname);
                   $.ajax({
                     url: "acceptinvite.php",
                     type: "GET",
@@ -156,6 +158,9 @@
                     success: function (response) {
                       if (response == 'done') {
                         window.alert("您已加入战队!");
+                        setTimeout(() => {
+                          window.location.href = "team.html";
+                        }, 1000);
                       } else {
                         window.alert("出错了!");
                       }

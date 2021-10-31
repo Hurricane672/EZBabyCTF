@@ -34,7 +34,7 @@
       <span class="Header-link" id="team">战队</span>
     </div>
     <div class="Header-item m-3">
-      <span class="Header-link" onclick="">排行榜</span>
+      <span class="Header-link" onclick="showboard()">排行榜</span>
     </div>
     <div class="Header-item m-3 logout">
       <span class="Header-link" onclick="signp()">注册</span>
@@ -163,6 +163,21 @@
         <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="changepassipt" />
         <button type="button" class="btn btn-block push">确定</button>
       </div>
+    </div>
+  </div>
+  <div class="popwindow" id="scoreboard">
+    <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px; height: 500px">
+      <div class="Box-header">
+        <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+          <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+            <path fill-rule="evenodd"
+              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+            </path>
+          </svg>
+        </button>
+        <h3 class="Box-title">EZBabyCTF排行榜</h3>
+      </div>
+      <div class="Box-body" id="board"></div>
     </div>
   </div>
   <script>
@@ -297,7 +312,23 @@
       nedmsak();
       typing("#signinipt", 2000);
     }
-
+    function showboard() {
+      $("#scoreboard").show();
+      nedmsak();
+      $.ajax({
+        url: "scoreboard.php",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        success: function (response) {
+          var toappdf = $("#board");
+          $.each(response, function (m1, m2) {
+            console.log(m2[0], m2[1]);
+            toappdf.append('<div class="Box-row"><span class="tname">'+ m2[0]+' </span><span class="tscore">'+ m2[1]+' </span></div>');
+          })
+        }
+      })
+    }
   </script>
   <!-- var id = $(this).attr("id") + "ipt"; if ($("#" + id)) submitFlag($("#" +
 id).val()); -->

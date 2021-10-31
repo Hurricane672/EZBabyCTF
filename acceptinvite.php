@@ -24,7 +24,7 @@ else{
             die("Invalid call.");
         }
         mysqli_query($conn,"SET NAMES UTF8");
-        $s1 = "update users team=\"".$tname."\" where id=\"".$id."\"";
+        $s1 = "update users set team=\"".$tname."\" where id=\"".$id."\"";
         $conn->query($s1);
         if(mysqli_affected_rows($conn)==1){
             echo "done";
