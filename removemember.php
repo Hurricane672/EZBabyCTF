@@ -31,7 +31,7 @@ else{
         $s1 = "select * from ".$tb." where tname=\"".$tname."\" and captain=\"".$captain."\" active=\"1\"";
         $conn->query($s1);
         if(mysqli_affected_rows($conn)!=0&&$rmname!==$captain){
-            $s2 = "update users set team=\"__NONE__\" where name=\"".$rmname."\"";
+            $s2 = "update `users` set team=\"__NONE__\" where `name`=\"".$rmname."\" and `team`=\"".$tname."\"";
             $conn->query($s2);
             if(mysqli_affected_rows($conn)!=-1){
                 echo "done";
