@@ -1,9 +1,0 @@
-version: '2'
-services:
-    monopoly:
-        build: ./
-        image: monopoly:latest
-        ports:
-          - "65530:9999"
-        restart: unless-stopped
-    

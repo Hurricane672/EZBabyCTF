@@ -39,10 +39,3 @@ else{
 }
 //http://192.168.64.129/removeteam.php?tname=1&name=1
 ?>
-
-
-
-
-
-
-
