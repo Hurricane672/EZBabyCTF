@@ -23,13 +23,14 @@ else{
             die("Invalid call.");
         }
         $s1 = "select from,to,message from notifications where to=\"".$name."\";";
+        echo $s1;
         $result = array();
         if ($r = $conn->query($s1)) {
             while($row = mysqli_fetch_row($r)){
                 array_push($result,$row);
             }
         }
-        var_dump(json_encode($result));
+        exit(json_encode($result));
     }
     else{
         die("Invalid call.");

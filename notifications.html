@@ -17,9 +17,37 @@
       font-size: large;
       font-weight: bold;
     }
+
+    .Box-row {
+      position: relative;
+      height: 8vh;
+    }
+
+    .From {
+      position: absolute;
+      left: 0%;
+      overflow: hidden;
+      display: none;
+    }
+
+    .Content {
+      position: absolute;
+      left: 0%;
+      width: 700px;
+      overflow: hidden;
+    }
+
+
+    .Reply {
+      position: absolute;
+      left: 90%;
+      overflow: hidden;
+    }
   </style>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="Js/md5.js"></script>
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script src="Js/mask.js"></script>
   <title>EZBabyCTF-Notification</title>
 </head>
 
@@ -35,9 +63,49 @@
       <span class="Header-link" onclick="returnindex()">返回首页</span>
     </div>
   </div>
+  <div class="marsk-container"></div>
   <div class="Box anim-fade-in note">
     <div class="Box-header">Notifications</div>
-    <div class="Box-body">你这里空空如也啊</div>
+    <div class="Box-row">
+      <span class="From">发送人</span>
+      <span class="Content">内容</span>
+      <span class="Reply">回复</span>
+    </div>
+    <div class="Box-row">
+      <span class="From">df6d2338b2b8fce1ec2f6dda0a630eb0</span>
+      <span class="Content">The captain of 12345 who named 987 invite you to join.</span>
+      <span class="Reply">
+        <button class="Box-btn-octicon btn-octicon replybtn" type="button">
+          <svg class="octicon octicon-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill-rule="evenodd"
+              d="M1.513 1.96a1.374 1.374 0 011.499-.21l19.335 9.215a1.146 1.146 0 010 2.07L3.012 22.25a1.374 1.374 0 01-1.947-1.46L2.49 12 1.065 3.21a1.374 1.374 0 01.448-1.25zm2.375 10.79l-1.304 8.042L21.031 12 2.584 3.208l1.304 8.042h7.362a.75.75 0 010 1.5H3.888z">
+            </path>
+          </svg>
+        </button></span>
+    </div>
+  </div>
+
+  <div class="popwindow" id="reply">
+    <div class="Box Box--overlay d-flex flex-column anim-fade-in fast" style="width: 600px;">
+      <div class="Box-header">
+        <button class="Box-btn-octicon btn-octicon float-right" type="button" onclick="closesign()">
+          <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16">
+            <path fill-rule="evenodd"
+              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z">
+            </path>
+          </svg>
+        </button>
+        <h3 class="Box-title">回信</h3>
+      </div>
+      <div class="Box-row"><strong>请输入您想要回复的消息(如果是来自队长的邀请，请回复"__Yes__"来加入战队)</strong></div>
+      <div class="Box-body" style="text-indent :2em;" id="replyhint">The captain of 12345 who named 987 invite you to
+        join.</div>
+      <div class="Box-footer">
+        <input type="text" class="form-control" style="width: 95%; margin: 2vh" id="replyipt" />
+        <button type="button" class="btn btn-block" id="sendmsg">确定</button>
+      </div>
+    </div>
+  </div>
   </div>
   <script>
     $(document).ready(function () {
@@ -45,6 +113,72 @@
         window.alert("error 3");
         window.location.href = "index.html";
       }
+      else {
+        var id = $.cookie("salt").substring(0, 32);
+        $.ajax({
+          url: "notifications.php",
+          type: "GET",
+          data: {
+            name: id
+          },
+          async: false,
+
+        })
+        $(".replybtn").click(function () {
+          var cont = $(this).parent().parent().find(".Content").text();
+          var tosend = $(this).parent().parent().find(".From").text();
+          $("#replyhint").text(cont);
+          $("#reply").show();
+          $(".marsk-container").show();
+          $("#sendmsg").click(function () {
+            var msg = "" + $("#replyipt").val();
+            if (msg == '' || msg == " ") {
+              window.alert("请输入内容!");
+            }
+            else if (msg == '__Yes__') {
+              $.ajax({
+                url: "team.php",
+                type: "GET",
+                async: false,
+                data: {
+                  id=tosend
+                },
+                success: function (teaminfo) {
+                  var tmname = teaminfo[0];
+                  $.ajax({
+                    url: "acceptinvite.php",
+                    type: "GET",
+                    async: false,
+                    data: {
+                      tname: tmname,
+                      id: id
+                    },
+                    success: function (response) {
+                      if (response == 'done') {
+                        window.alert("您已加入战队!");
+                      } else {
+                        window.alert("出错了!");
+                      }
+                    },
+                    error: function () {
+                      window.alert("error:1");
+                    }
+                  })
+                },
+                error: function () {
+                  window.alert("error:1");
+                }
+
+              })
+            }
+            $.ajax({
+              url: ""
+            })
+          })
+        })
+
+      }
+
     });
     function returnindex() {
       window.location.href = "index.html";
