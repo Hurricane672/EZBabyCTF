@@ -115,8 +115,8 @@ if ($conn->connect_error) {
 	// die("Connection faild." . $conn->connect_error);
 	die("8");
 }
-
-$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path2 . "\")";
+$path3 = "./challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];
+$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path3 . "\")";
 $sql2 = "SELECT * FROM challenges where name=\"" . $no_extension_name . "\"";
 // echo $sql2;
 
