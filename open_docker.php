@@ -40,16 +40,6 @@ $before = '/\d{1,}:\d{1,}/';
 preg_match($before, $content, $match);
 $after = $Num1 . ':' . $Num2;
 $content = str_replace($match, $after, $content);
-<<<<<<< HEAD
-var_dump($content);
-$r1 = file_put_contents($path, $content);
-var_dump($r1);
-$cmd1 = "cd ./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"] . "&& sudo docker-compose up -d"; //正常
-echo $cmd1;
-$output = shell_exec($cmd1);
-var_dump($output);
-echo "192.168.64.129:" . $Num1;
-=======
 file_put_contents($path, $content);
 $cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
 echo "-----------------------";
@@ -58,4 +48,3 @@ $result=shell_exec($cmd2);
 echo "-----------------------";
 var_dump($result);
 echo "192.168.223.131:" . $Num1;
->>>>>>> d8848b82f0e9bbd5d1ca1aa0ffe7b8c8d606c534
