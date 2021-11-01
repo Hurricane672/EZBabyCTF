@@ -129,7 +129,7 @@ body {
   background-color:rgba(255, 0, 0, 0.685);
 }
 .successhps {
-  background-color:rgba(9, 255, 0, 1) !important;
+  background-color:rgb(6, 173, 0) !important;
 }
 .Box-body{
   overflow-y: auto;
