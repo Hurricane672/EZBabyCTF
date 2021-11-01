@@ -41,16 +41,17 @@ $before = '/\d{1,}:\d{1,}/';
 preg_match($before, $content, $match);
 $after = $Num1 . ':' . $Num2;
 $content = str_replace($match, $after, $content);
-echo $content;
-$cmd3 = "chmod -R 777 * && ls";
-shell_exec($cmd3);
-
-$newfile=file_put_contents($path, $content);
-var_dump($newfile);
-// $cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
+// echo $content;
+// $cmd3 = "chmod -R 777 * && ls";
+// shell_exec($cmd3);
 // echo "-----------------------";
-// echo $cmd2;
-// $result=shell_exec($cmd2);
+$newfile=file_put_contents($path3, $content);
+// var_dump($newfile);
 // echo "-----------------------";
-// var_dump($result);
-// echo "192.168.223.131:" . $Num1;
+$cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
+echo "-----------------------";
+echo $cmd2;
+$result=shell_exec($cmd2);
+echo "-----------------------";
+var_dump($result);
+echo "192.168.223.131:" . $Num1;
