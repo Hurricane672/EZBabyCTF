@@ -235,10 +235,14 @@ function director(val, flag, re) {
 }
 
 function submitFlag(submit) {
-
-    $(".pophint").show();
-    $(".marsk-container").show();
-
+    if (submit == 1) {
+        $("#truehint").show();
+        $(".marsk-container").show();
+    }
+    else {
+        $("#falsehint").show();
+        $(".marsk-container").show();
+    }
 }
 
 

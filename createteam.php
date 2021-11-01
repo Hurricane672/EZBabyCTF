@@ -66,4 +66,3 @@ else{
         die("Invalid call.");
     }
 }
-//http://192.168.64.129/createteam.php?tname=1&name=1

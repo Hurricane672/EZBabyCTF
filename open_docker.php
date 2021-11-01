@@ -56,9 +56,9 @@ $cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo dock
 // echo $cmd2;
 $result=shell_exec($cmd2);
 // echo "-----------------------";
-var_dump($result);
+// var_dump($result);
 $list = array();
-$url = "http://192.168.64.129:" . $Num1;
+$url = "http://192.168.79.132:" . $Num1;
 array_push($list,$url);
 // echo "http://192.168.64.129:" . $Num1;
 
@@ -66,7 +66,7 @@ array_push($list,$path2);
 $path4 = "./TEMP/" . $_POST["chall_name"] . $_POST["user_id"];
 array_push($list,$path4);
 echo json_encode($list);
-var_dump(json_decode(json_encode($list)));
+// var_dump(json_decode(json_encode($list)));
 // $cmd4 = "python3 countDown.py \"".$path2."\"";
 // echo $cmd4;
 // shell_exec($cmd4);
