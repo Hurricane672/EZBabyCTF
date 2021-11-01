@@ -100,7 +100,7 @@ if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && in_arra
 
 $cmd2 = "cd ../challenges/" . $_POST["chall_type"] . " && mkdir " . $no_extension_name;
 shell_exec($cmd2);
-$path2 = "../challenges/" . $_POST["chall_type"] . "/" . $no_extension_name;
+$path2 = "../challenges/" . $_POST["chall_type"] . "/";
 unzip_file($path, $path2);
 
 // $cmd3 = "rm ../challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];

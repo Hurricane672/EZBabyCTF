@@ -3,10 +3,6 @@ services:
   web:
     build: .
     ports:
-<<<<<<< HEAD
       - "44271:15698"
-=======
-      - "23500:3000"
->>>>>>> d8848b82f0e9bbd5d1ca1aa0ffe7b8c8d606c534
   db:
     image: "mongo"
