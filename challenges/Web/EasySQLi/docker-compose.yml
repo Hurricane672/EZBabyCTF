@@ -18,7 +18,7 @@ services:
   web:
     build: .
     ports: 
-      - "11002:3000"
+      - "11002:80"
     volumes: 
       - "./logs:/var/log/apache2/"
     environment:
