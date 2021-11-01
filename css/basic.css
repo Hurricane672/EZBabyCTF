@@ -113,6 +113,11 @@ body {
   top: 22%;
   right: 12%;
 }
+.chtype{
+  opacity: .08;
+  font-size: 100px;
+  transform: translateY(-20%);
+}
 
 .logon{
   display: none;
@@ -124,7 +129,7 @@ body {
   background-color:rgba(255, 0, 0, 0.685);
 }
 .successhps {
-  background-color:rgba(9, 255, 0, 0.685);
+  background-color:rgb(6, 173, 0) !important;
 }
 .Box-body{
   overflow-y: auto;
