@@ -8,8 +8,11 @@ $before = '/\d{1,}:\d{1,}/';
 preg_match($before, $content, $match);
 $after = $Num1 . ':' . $Num2;
 $content = str_replace($match, $after, $content);
-file_put_contents($path, $content);
+var_dump($content);
+$r1 = file_put_contents($path, $content);
+var_dump($r1);
 $cmd1 = "cd ./challenges/" . $_POST["type_name"] . "/" . $_POST["challenge_name"] . "&& sudo docker-compose up -d"; //正常
+echo $cmd1;
 $output = shell_exec($cmd1);
-
-echo "192.168.223.131:" . $Num1;
+var_dump($output);
+echo "192.168.64.129:" . $Num1;

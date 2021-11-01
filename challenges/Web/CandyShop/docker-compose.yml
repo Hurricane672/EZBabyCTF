@@ -3,6 +3,6 @@ services:
   web:
     build: .
     ports:
-      - "23500:3000"
+      - "44271:15698"
   db:
     image: "mongo"
