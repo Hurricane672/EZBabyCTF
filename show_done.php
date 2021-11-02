@@ -22,6 +22,6 @@ if ($conn->connect_error) {
     $arr = array_diff($arr, [""]);
     $arr = array_values($arr);
 
-    var_dump(json_encode($arr));
+    exit(json_encode($arr));
 }
 $conn->close();

@@ -252,8 +252,8 @@
         success: function (challinfo) {
           var toappdf = $("#chllfa");
           $.each(challinfo, function (m1, m2) {
-            toappdf.append('<button class="btn-mktg btn-transparent enlarge m-2" type="button" style="position: relative" id="' + m1 + '"></button>');
-            var newch = $("#" + m1);
+            toappdf.append('<button class="btn-mktg btn-transparent enlarge m-2" type="button" style="position: relative" id="' + m2[1] + '"></button>');
+            var newch = $("#" + m2[1]);
             newch.append('<div class="challengeid">' + m2[0] + '</div>');
             newch.append('<div class="challengename">' + m2[1] + '</div>');
             newch.append('<div class="chtype">' + m2[2] + '</div>');
@@ -269,12 +269,19 @@
       if ($.cookie("salt") != undefined) {
         var id = $.cookie("salt").substring(0, 32);
         $.ajax({
-          url: "",
+          url: "show_done.php",
           async: false,
           data: {
             id: id
+          },
+          dataType: "json",
+          type: "POST",
+          success:function(challdone){
+            $.each(challdone,function (m1,m2) {
+              $("#"+m2).addClass("successhps");
+            })
           }
-        })
+        });
       }
       $(".submittingbtn").click(function () {
 
@@ -429,7 +436,7 @@
             })
             tmp.text("Loading……");
           }
-          if (chtype == 'Misc') {
+          if (chtype == 'Misc' || chtype == 'Pwn') {
             window.open(todload);
           }
         }
@@ -463,11 +470,6 @@
         }
       })
     }
-    $(document).ready(function showchall() {
-
-
-
-    })
   </script>
   <!-- var id = $(this).attr("id") + "ipt"; if ($("#" + id)) submitFlag($("#" +
 id).val()); -->
