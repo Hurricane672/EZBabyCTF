@@ -19,6 +19,7 @@ if ($conn->connect_error) {
         }
     }
 }
+
 $sql2 = "SELECT flag FROM challenges WHERE name=\"" . $_POST["chall_name"] . "\"";
 $result2 = $conn->query($sql2);
 while ($row2 = mysqli_fetch_row($result2)) {
