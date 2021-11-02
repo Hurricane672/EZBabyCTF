@@ -244,6 +244,38 @@
         }, 3000);
 
       });
+      $.ajax({
+        url: "show_challenges.php",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        success: function (challinfo) {
+          var toappdf = $("#chllfa");
+          $.each(challinfo, function (m1, m2) {
+            toappdf.append('<button class="btn-mktg btn-transparent enlarge m-2" type="button" style="position: relative" id="' + m1 + '"></button>');
+            var newch = $("#" + m1);
+            newch.append('<div class="challengeid">' + m2[0] + '</div>');
+            newch.append('<div class="challengename">' + m2[1] + '</div>');
+            newch.append('<div class="chtype">' + m2[2] + '</div>');
+            newch.append('<div class="challengedisc">题目描述：' + m2[3] + '</div>');
+            newch.append('<span class="score">' + m2[4] + '</span>');
+            newch.attr("zipherf", "" + m2[5]);
+            newch.append('<div class="submitflagfather"><input class="form-control submitflag" type="text" placeholder="flag{xxxxxxx}" /><span class="Box-btn-octicon btn-octicon submittingbtn" type="button"><svg class="octicon octicon-x"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.53 1.22a.75.75 0 00-1.06 0L3.72 4.97a.75.75 0 001.06 1.06l2.47-2.47v6.69a.75.75 0 001.5 0V3.56l2.47 2.47a.75.75 0 101.06-1.06L8.53 1.22zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"></path></svg></span> </div>')
+          })
+        }
+
+      })
+
+      if ($.cookie("salt") != undefined) {
+        var id = $.cookie("salt").substring(0, 32);
+        $.ajax({
+          url: "",
+          async: false,
+          data: {
+            id: id
+          }
+        })
+      }
       $(".submittingbtn").click(function () {
 
         var chatosb = $(this).parent().parent();
@@ -281,7 +313,7 @@
                     flag: tosb
                   },
                   success: function (response) {
-                    if (response == 'true') {
+                    if (response == 'right') {
                       submitFlag(1);
                     }
                     else {
@@ -398,7 +430,10 @@
             tmp.text("Loading……");
           }
           if (chtype == 'Misc') {
-            window.open(todload);
+
+            setTimeout(() => {
+              window.open(todload);
+            }, 1000);
           }
         }
 
@@ -433,38 +468,7 @@
     }
     $(document).ready(function showchall() {
 
-      $.ajax({
-        url: "show_challenges.php",
-        type: "GET",
-        async: false,
-        dataType: "json",
-        success: function (challinfo) {
-          var toappdf = $("#chllfa");
-          $.each(challinfo, function (m1, m2) {
-            toappdf.append('<button class="btn-mktg btn-transparent enlarge m-2" type="button" style="position: relative" id="' + m1 + '"></button>');
-            var newch = $("#" + m1);
-            newch.append('<div class="challengeid">' + m2[0] + '</div>');
-            newch.append('<div class="challengename">' + m2[1] + '</div>');
-            newch.append('<div class="chtype">' + m2[2] + '</div>');
-            newch.append('<div class="challengedisc">题目描述：' + m2[3] + '</div>');
-            newch.append('<span class="score">' + m2[4] + '</span>');
-            newch.attr("zipherf", "" + m2[5]);
-            newch.append('<div class="submitflagfather"><input class="form-control submitflag" type="text" placeholder="flag{xxxxxxx}" /><span class="Box-btn-octicon btn-octicon submittingbtn" type="button"><svg class="octicon octicon-x"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.53 1.22a.75.75 0 00-1.06 0L3.72 4.97a.75.75 0 001.06 1.06l2.47-2.47v6.69a.75.75 0 001.5 0V3.56l2.47 2.47a.75.75 0 101.06-1.06L8.53 1.22zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"></path></svg></span> </div>')
-          })
-        }
 
-      })
-
-      if ($.cookie("salt") != undefined) {
-        var id = $.cookie("salt").substring(0, 32);
-        $.ajax({
-          url: "",
-          async: false,
-          data: {
-            id: id
-          }
-        })
-      }
 
     })
   </script>
