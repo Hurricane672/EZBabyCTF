@@ -58,7 +58,7 @@ $result=shell_exec($cmd2);
 // echo "-----------------------";
 // var_dump($result);
 $list = array();
-$url = "http://192.168.79.132:" . $Num1;
+$url = "http://192.168.79.133:" . $Num1;
 array_push($list,$url);
 // echo "http://192.168.64.129:" . $Num1;
 
