@@ -387,14 +387,14 @@
         }
         window.location.href = "admin.html";
       })
-      $(".enlarge").click(function () {
-        var chtype = $(this).find(".chtype").text();
-        var chname = $(this).find(".challengename").text();
-        var tmp = $(this).find(".challengename");
+      $(".challengedisc").click(function () {
+        var chtype = $(this).parent().find(".chtype").text();
+        var chname = $(this).parent().find(".challengename").text();
+        var tmp = $(this).parent().find(".challengename");
         var coie = $.cookie("salt");
-        var dis = $(this).find(".challengedisc");
-        var ipt = $(this).find(".submitflag");
-        var todload = $(this).attr("zipherf");
+        var dis = $(this).parent().find(".challengedisc");
+        var ipt = $(this).parent().find(".submitflag");
+        var todload = $(this).parent().attr("zipherf");
         if (coie == undefined) {
           window.alert("请先登录！");
         } else {
@@ -430,10 +430,7 @@
             tmp.text("Loading……");
           }
           if (chtype == 'Misc') {
-
-            setTimeout(() => {
-              window.open(todload);
-            }, 1000);
+            window.open(todload);
           }
         }
 
