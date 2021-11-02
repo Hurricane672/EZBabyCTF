@@ -3,6 +3,7 @@ header("Content-type:text/html;charset=utf-8");
 
 // $results = array(1 => "Invalid characters", 2 => "text too long", 3 => "challenge score too big", 4 => "Invalid flag", 5 => "File format error", 6 => "upgrade", 7 => "Invalid file format", 8 => "db faild", 9 => "not the same name", 10 => "success");
 // var_dump(json_encode($results));
+
 function unzip_file(string $zipName, string $dest)
 {
 	// echo ("------------------------");
@@ -106,6 +107,14 @@ unzip_file($path, $path2);
 // $cmd3 = "rm ../challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];
 // shell_exec($cmd3);
 
+if ($_POST["chall_type"] === "Pwn") {
+	//cd ./challenges/Pwn/ezheap/ && zip -q -r attachmennt.zip attachment
+	$cmd4 = "cd ../challenges/Pwn/" . $no_extension_name . "/" . " && zip -q -r attachment.zip attachment";
+	// echo $cmd4;
+	shell_exec($cmd4);
+}
+
+
 $user = "ezbabyctf";
 $passwd = "ezbabyctf";
 $db = "ezbabyctf";
@@ -115,46 +124,91 @@ if ($conn->connect_error) {
 	// die("Connection faild." . $conn->connect_error);
 	die("8");
 }
-$path3 = "./challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];
-$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path3 . "\")";
-$sql2 = "SELECT * FROM challenges where name=\"" . $no_extension_name . "\"";
-// echo $sql2;
+if ($_POST["chall_type"] === "Pwn") {
+	$path3 = "./challenges/" . $_POST["chall_type"] . "/" . $no_extension_name . "/attachment.zip";
+	$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path3 . "\")";
+	$sql2 = "SELECT * FROM challenges where name=\"" . $no_extension_name . "\"";
+	// echo $sql2;
 
-$result2 = $conn->query($sql2);
-if (mysqli_affected_rows($conn) > 0) {
-	//var_dump($conn->query($sql2));
-	$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
-	// var_dump($sql3);
-	$conn->query($sql3);
-	echo ("6" . "<br>");
+	$result2 = $conn->query($sql2);
+	if (mysqli_affected_rows($conn) > 0) {
+		//var_dump($conn->query($sql2));
+		$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
+		// var_dump($sql3);
+		$conn->query($sql3);
+		echo ("6" . "<br>");
 
-	if ($conn->query($sql) === TRUE) {
-		// echo "<br>" . "success";
-		//echo $sql;
-		echo ("10");
-		$result3 = $conn->query($sql2);
-		$data = mysqli_fetch_object($result3);
-		var_dump(json_encode($data));
+		if ($conn->query($sql) === TRUE) {
+			// echo "<br>" . "success";
+			//echo $sql;
+			echo ("10");
+			$result3 = $conn->query($sql2);
+			$data = mysqli_fetch_object($result3);
+			var_dump(json_encode($data));
 
-		// var_dump($result3);
+			// var_dump($result3);
+		} else {
+			//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
+			die("8");
+		}
+		// die("6");
 	} else {
-		//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
-		die("8");
+		if ($conn->query($sql) === TRUE) {
+			// echo "<br>" . "success";
+			//echo $sql;
+			echo ("10");
+			$result3 = $conn->query($sql2);
+			$data = mysqli_fetch_object($result3);
+			// var_dump(json_encode($data));
+
+			// var_dump($result3);
+		} else {
+			//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
+			die("8");
+		}
 	}
-	// die("6");
 } else {
-	if ($conn->query($sql) === TRUE) {
-		// echo "<br>" . "success";
-		//echo $sql;
-		echo ("10");
-		$result3 = $conn->query($sql2);
-		$data = mysqli_fetch_object($result3);
-		// var_dump(json_encode($data));
+	$path3 = "./challenges/" . $_POST["chall_type"] . "/" . $_FILES["chall_file"]["name"];
+	$sql = "INSERT INTO  challenges (`id`,`name`,`category`, `message`,`value`,`flag`,`file`)  VALUES (\"" . md5($_POST["chall_name"]) . "\",\"" . $_POST["chall_name"] . "\",\"" . $_POST["chall_type"] . "\",\"" . $_POST["chall_des"] . "\"," . $_POST["chall_score"] . ",\"" . $_POST["chall_flag"] . "\",\"" . $path3 . "\")";
+	$sql2 = "SELECT * FROM challenges where name=\"" . $no_extension_name . "\"";
+	// echo $sql2;
 
-		// var_dump($result3);
+	$result2 = $conn->query($sql2);
+	if (mysqli_affected_rows($conn) > 0) {
+		//var_dump($conn->query($sql2));
+		$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
+		// var_dump($sql3);
+		$conn->query($sql3);
+		echo ("6" . "<br>");
+
+		if ($conn->query($sql) === TRUE) {
+			// echo "<br>" . "success";
+			//echo $sql;
+			echo ("10");
+			$result3 = $conn->query($sql2);
+			$data = mysqli_fetch_object($result3);
+			var_dump(json_encode($data));
+
+			// var_dump($result3);
+		} else {
+			//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
+			die("8");
+		}
+		// die("6");
 	} else {
-		//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
-		die("8");
+		if ($conn->query($sql) === TRUE) {
+			// echo "<br>" . "success";
+			//echo $sql;
+			echo ("10");
+			$result3 = $conn->query($sql2);
+			$data = mysqli_fetch_object($result3);
+			// var_dump(json_encode($data));
+
+			// var_dump($result3);
+		} else {
+			//die("<br>" . "Error: " . $sql . "<br>" . $conn->error);
+			die("8");
+		}
 	}
 }
 $conn->close();
