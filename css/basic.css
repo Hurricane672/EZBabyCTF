@@ -118,6 +118,9 @@ body {
   font-size: 100px;
   transform: translateY(-20%);
 }
+.challengeid{
+  display: none;
+}
 
 .logon{
   display: none;

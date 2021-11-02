@@ -1,8 +1,8 @@
 <?php
 header("Content-type:text/html;charset=utf-8");
 
-$results = array(1 => "Invalid characters", 2 => "text too long", 3 => "challenge score too big", 4 => "Invalid flag", 5 => "File format error", 6 => "upgrade", 7 => "Invalid file format", 8 => "db faild", 9 => "not the same name", 10 => "success");
-var_dump(json_encode($results));
+// $results = array(1 => "Invalid characters", 2 => "text too long", 3 => "challenge score too big", 4 => "Invalid flag", 5 => "File format error", 6 => "upgrade", 7 => "Invalid file format", 8 => "db faild", 9 => "not the same name", 10 => "success");
+// var_dump(json_encode($results));
 function unzip_file(string $zipName, string $dest)
 {
 	// echo ("------------------------");
@@ -149,7 +149,7 @@ if (mysqli_affected_rows($conn) > 0) {
 		echo ("10");
 		$result3 = $conn->query($sql2);
 		$data = mysqli_fetch_object($result3);
-		var_dump(json_encode($data));
+		// var_dump(json_encode($data));
 
 		// var_dump($result3);
 	} else {
