@@ -243,7 +243,12 @@
       }
       $("form").ajaxForm(function (data) {
         console.log(data);
-        console.log("str:" + JSON.stringify(data));
+        if (data[0] == '10' || data[0] == '6') {
+          window.alert("题目上传成功！请返回首页查看");
+        }
+        else {
+          window.alert("检查一下！");
+        }
       }
       );
       $("#returnindex").click(function () {

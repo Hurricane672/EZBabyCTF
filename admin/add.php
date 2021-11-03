@@ -88,7 +88,7 @@ if (($_FILES["chall_file"]["type"] == "application/x-zip-compressed") && in_arra
 			// echo $cmd3;
 			shell_exec($cmd3);
 			move_uploaded_file($_FILES["chall_file"]["tmp_name"], $path);
-			echo ("6" . "<br>");
+			echo ("6");
 		} else {
 			move_uploaded_file($_FILES["chall_file"]["tmp_name"], $path);
 			// echo "文件存储在: " . $path;
@@ -136,7 +136,7 @@ if ($_POST["chall_type"] === "Pwn") {
 		$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
 		// var_dump($sql3);
 		$conn->query($sql3);
-		echo ("6" . "<br>");
+		echo ("6");
 
 		if ($conn->query($sql) === TRUE) {
 			// echo "<br>" . "success";
@@ -144,7 +144,7 @@ if ($_POST["chall_type"] === "Pwn") {
 			echo ("10");
 			$result3 = $conn->query($sql2);
 			$data = mysqli_fetch_object($result3);
-			var_dump(json_encode($data));
+			// var_dump(json_encode($data));
 
 			// var_dump($result3);
 		} else {
@@ -179,7 +179,7 @@ if ($_POST["chall_type"] === "Pwn") {
 		$sql3 = "DELETE FROM challenges WHERE name=\"" . $no_extension_name . "\"";
 		// var_dump($sql3);
 		$conn->query($sql3);
-		echo ("6" . "<br>");
+		echo ("6");
 
 		if ($conn->query($sql) === TRUE) {
 			// echo "<br>" . "success";
@@ -187,7 +187,7 @@ if ($_POST["chall_type"] === "Pwn") {
 			echo ("10");
 			$result3 = $conn->query($sql2);
 			$data = mysqli_fetch_object($result3);
-			var_dump(json_encode($data));
+			// var_dump(json_encode($data));
 
 			// var_dump($result3);
 		} else {
