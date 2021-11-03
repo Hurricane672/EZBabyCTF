@@ -48,7 +48,7 @@ $content = str_replace($match, $after, $content);
 // shell_exec($cmd3);
 // echo "-----------------------";
 $newfile = file_put_contents($path3, $content);
-var_dump($newfile);
+// var_dump($newfile);
 // echo "-----------------------";
 $cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
 // echo "-----------------------";

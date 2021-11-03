@@ -19,7 +19,7 @@ body {
 .enlarge {
   background-color: var(--color-scale-gray-9);
   display: inline-block;
-  width: 390px;
+  width: 398px;
   height: 160px;
 }
 .enlarge:hover {
