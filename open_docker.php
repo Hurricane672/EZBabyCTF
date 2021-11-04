@@ -50,7 +50,9 @@ $content = str_replace($match, $after, $content);
 $newfile = file_put_contents($path3, $content);
 // var_dump($newfile);
 // echo "-----------------------";
-$cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
+$path3 = str_replace("/docker-compose.yml", "", $path3);
+$cmd2 = "cd " . $path3 . " && sudo docker-compose up -d"; //正常
+//$cmd2 = "cd ./TEMP/" . $_POST["chall_name"] . $_POST["user_id"] . " && sudo docker-compose up -d"; //正常
 // echo "-----------------------";
 // echo $cmd2;
 $result = shell_exec($cmd2);

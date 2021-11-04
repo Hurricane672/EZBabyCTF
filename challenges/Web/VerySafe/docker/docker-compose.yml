@@ -6,7 +6,7 @@ services:
     volumes:
       - ./conf/Caddyfile:/etc/caddy/Caddyfile
     ports:
-      - "54120:80"
+      - "60000:80"
   php:
     build: .
     restart: unless-stopped
