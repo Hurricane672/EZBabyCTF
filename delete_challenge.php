@@ -10,7 +10,13 @@ if ($conn->connect_error) {
 }
 $sql = "DELETE FROM challenges WHERE name=\"" . $_POST["chall_name"] . "\"";
 // echo $sql . "<br>";
-$conn->query($sql);
+$result=$conn->query($sql);
+if(mysqli_affected_rows($conn)>0)
+{
+    echo "TRUE";
+}else{
+    echo "Wrong";
+}
 $cmd1 = "rm -rf ./challenges/" . $_POST["chall_type"] . "/" . $_POST["chall_name"];
 // echo $cmd1 . "<br>";
 shell_exec($cmd1);
