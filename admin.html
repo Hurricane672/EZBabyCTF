@@ -247,7 +247,7 @@
       }
       $("form").ajaxForm(function (data) {
         console.log(data);
-        if (data[0] == '10' || data[0] == '6') {
+        if (data[0] + data[1] + "" == '10' || data[0] == '6') {
           window.alert("题目上传成功！请返回首页查看");
         }
         else {
@@ -276,7 +276,12 @@
             chall_name: chname
           },
           success: function (res) {
-            window.alert("已删除成功！");
+            if (res == 'TRUE') {
+              window.alert("已删除成功！");
+            }
+            else {
+              window.alert("删除失败！");
+            }
           },
           error: function () {
             window.alert("error:1");

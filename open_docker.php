@@ -60,7 +60,8 @@ $result = shell_exec($cmd2);
 // var_dump($result);
 $list = array();
 // echo $Num1;
-$url = "http://192.168.223.131:" . $Num1;
+$Host = $_SERVER['SERVER_ADDR'];
+$url = "http://".$Host.":" . $Num1;
 array_push($list, $url);
 // echo "http://192.168.64.129:" . $Num1;
 

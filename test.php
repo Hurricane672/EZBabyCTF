@@ -15,5 +15,5 @@
 // errorwww cd ./challenges/Web/CandyShop
 // error1
 // error2
-var_dump(is_dir("./TEMP/CandyShop00002"));
+// var_dump();
 ?> 
