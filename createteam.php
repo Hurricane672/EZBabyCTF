@@ -66,3 +66,4 @@ else{
         die("Invalid call.");
     }
 }
+?>

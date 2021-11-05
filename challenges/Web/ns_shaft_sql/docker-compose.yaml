@@ -15,7 +15,7 @@ services:
     # image: php:8.0.10-apache
     build: .
     ports:
-      - "30000:80"
+      - 23334:80
     # volumes:
     #   - ./www:/var/www/html
     restart: always

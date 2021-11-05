@@ -192,17 +192,18 @@
             async: false,
             data: {
               tname: teamname,
-              id: $.cookie("salt").substring(0, 32),
-              success: function (response) {
-                if (response == 'done') {
-                  $("#setnewtipt").attr("class", "successhps");
-                  setTimeout(() => {
-                    window.location.href = "team.html";
-                  }, 3000);
-                } else {
-                  $("#setnewtipt").attr("class", "errorhps");
-                  window.alert("出错了，可能是队名已经存在了！");
-                }
+              id: $.cookie("salt").substring(0, 32)
+            },
+            success: function (response) {
+              console.log(response);
+              if (response == 'done') {
+                $("#setnewtipt").attr("class", "successhps");
+                setTimeout(() => {
+                  window.location.href = "team.html";
+                }, 3000);
+              } else {
+                $("#setnewtipt").attr("class", "errorhps");
+                window.alert("出错了，可能是队名已经存在了！");
               }
             }
           })
