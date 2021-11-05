@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `challenges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `challenges` (
-  `id` varchar(10) NOT NULL,
+  `id` varchar(32) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `category` varchar(100) NOT NULL,
   `message` text NOT NULL,
@@ -148,6 +148,7 @@ CREATE TABLE `users` (
   `name` varchar(20) NOT NULL,
   `team` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `score` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -158,7 +159,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('c4ca4238a0b923820dcc509a6f75849b','1','__NONE__','1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -171,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-18 19:56:48
+-- Dump completed on 2021-11-05 15:26:04
