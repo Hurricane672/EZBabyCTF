@@ -276,9 +276,9 @@
           },
           dataType: "json",
           type: "POST",
-          success:function(challdone){
-            $.each(challdone,function (m1,m2) {
-              $("#"+m2).addClass("successhps");
+          success: function (challdone) {
+            $.each(challdone, function (m1, m2) {
+              $("#" + m2).addClass("successhps");
             })
           }
         });
@@ -297,37 +297,23 @@
         } else {
           var id = coie.substring(0, 32);
           $.ajax({
-            url: "team.php",
-            type: "GET",
-            dataType: "json",
+            url: "flag.php",
+            type: "POST",
             async: false,
             data: {
-              id: id
+              id: id,
+              chall_name: chname,
+              flag: tosb
             },
-            success: function (teaminfo) {
-              if (teaminfo[0] == "__NONE__") {
-                window.alert("请先加入战队！");
+            success: function (response) {
+              if (response == 'right') {
+                submitFlag(1);
+              }
+              else if (response=='you have done this challenges') {
+                window.alert("你已经做过这个题目了！");
               }
               else {
-                $.ajax({
-                  url: "flag.php",
-                  type: "POST",
-                  async: false,
-                  data: {
-                    id: id,
-                    chall_name: chname,
-                    tname: teaminfo[0],
-                    flag: tosb
-                  },
-                  success: function (response) {
-                    if (response == 'right') {
-                      submitFlag(1);
-                    }
-                    else {
-                      submitFlag(0);
-                    }
-                  }
-                })
+                submitFlag(0);
               }
             }
           })

@@ -43,6 +43,18 @@
       left: 90%;
       overflow: hidden;
     }
+
+    #scoreboard {
+      z-index: 5;
+      height: 100px;
+      position: absolute;
+      top: 50px;
+      right: -3%;
+      color: var(--color-scale-yellow-3);
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.826);
+      font: bold 50px arial, verdana;
+    }
   </style>
   <script src="Js/md5.js"></script>
   <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
@@ -65,6 +77,7 @@
   </div>
   <div class="marsk-container"></div>
   <div class="Box anim-fade-in note" id="noteapp">
+    <div class="border rounded-1 color-shadow-medium p-4" id="scoreboard"></div>
     <div class="Box-header">Notifications</div>
     <div class="Box-row">
       <span class="From pophint">发送人</span>
@@ -134,10 +147,20 @@
           }
 
         })
+        $.ajax({
+          url: "person_score.php",
+          type: "POST",
+          data: {
+            id: id
+          },
+          success: function (socre) {
+            $("#scoreboard").text(socre);
+          }
+        })
         $(".replybtn").click(function () {
           var cont = $(this).parent().parent().find(".Content").text();
           var tosend = $(this).parent().parent().find(".From").text();
-          $("#replyhint").text("回复："+tosend+" : "+cont);
+          $("#replyhint").text("回复：" + tosend + " : " + cont);
           $("#reply").show();
           $(".marsk-container").show();
           $("#sendmsg").click(function () {

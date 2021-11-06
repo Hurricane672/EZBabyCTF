@@ -11,4 +11,4 @@ if ($conn->connect_error) {
 $sql = "SELECT score FROM users WHERE id=\"" . $_POST["id"] . "\"";
 $result = $conn->query($sql);
 $row = mysqli_fetch_row($result);
-var_dump($row[0]);
+exit ($row[0]);
