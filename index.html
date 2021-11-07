@@ -391,7 +391,7 @@
         if (coie == undefined) {
           window.alert("请先登录！");
         } else {
-          if (chtype == 'Web' || chtype == 'Pwn') {
+          if (chtype == 'Web') {
             $.ajax({
               url: "open_docker.php",
               type: "POST",
@@ -422,7 +422,7 @@
             })
             tmp.text("Loading……");
           }
-          if (chtype == 'Misc' || chtype == 'Pwn') {
+          if (chtype == 'Misc' || chtype == 'Re') {
             window.open(todload);
           }
         }
