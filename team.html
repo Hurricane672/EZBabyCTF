@@ -10,6 +10,7 @@
     <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="Js/mask.js"></script>
+    <script src="Js/md5.js"></script>
 
     <title>EZBabyCTF-team</title>
     <style>
@@ -268,6 +269,14 @@
                     },
                     success: function (response) {
                         if (response == 'done') {
+                            $.ajax({
+                                url: "message.php",
+                                data: {
+                                    from: id,
+                                    msg: "队伍" + teamnam + "的队长把你移出了队伍qwq",
+                                    to: hex_md5(name)
+                                }
+                            })
                             window.alert("移除成功！");
                         }
                         else if (response == 'NO') {
