@@ -55,14 +55,24 @@ else{
             $s1="select name from users where team=\"".$tname."\"";
             $result = array($tname,"member");
             $s2 = "select score from scoreboard where tname=\"".$tname."\"";
+            $s3 = "select captain from teams where tname=\"".$tname."\"";
+            $r3 = $conn->query($s3);
+            $captainid = mysqli_fetch_row($r3)[0];
+            $s4="select name from users where id=\"".$captainid."\"";
+            $r4 = $conn->query($s4);
+            $captain = mysqli_fetch_row($r4)[0];
             if ($r = $conn->query($s2)) {
                 while($row = mysqli_fetch_row($r)){
                     array_push($result,$row[0]);
                 }
             }
+            array_push($result,$captain);
             if ($r = $conn->query($s1)) {
                 while($row = mysqli_fetch_row($r)){
-                    array_push($result,$row[0]);
+                    if($row[0]!=$captain){
+                        array_push($result,$row[0]);
+                    }
+                                     
                 }
             }
 
