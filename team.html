@@ -197,7 +197,7 @@
                 $("#publishpl").text(response[0]);
                 $("#scoreboard").text(response[2]);
                 for (let i = 3; i < response.length; i++) {
-                    $("#memberlist").append("<div class=Box-row>" + response[i] + "</div>")
+                    $("#memberlist").append("<div class=Box-row>" +htmlEncodeJQ(response[i]) + "</div>")
                 }
                 if (response[1] == 'captain') {
                     $("#settm").show();
@@ -316,6 +316,9 @@
                     window.alert("error:1");
                 }
             })
+        }
+        function htmlEncodeJQ(str) {
+            return $('<span/>').text(str).html();
         }
     </script>
 </body>

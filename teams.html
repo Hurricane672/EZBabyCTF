@@ -161,7 +161,7 @@
           console.log(response);
           $.each(response, function (m1, m2) {
             console.log(m2[0], m2[1]);
-            toappdf.append('<div class="Box-row"><span class="tmname">' + m2[0] + '</span><span class= "tmscore" >' + m2[1] + '</span ><span span class="jointm" >' + '<button class="Box-btn-octicon btn-octicon jointmbt" id="' + m2[0] + '" type="button">' + join + '</span ></div>');
+            toappdf.append('<div class="Box-row"><span class="tmname">' + htmlEncodeJQ(m2[0]) + '</span><span class= "tmscore" >' + htmlEncodeJQ(m2[1]) + '</span ><span span class="jointm" >' + '<button class="Box-btn-octicon btn-octicon jointmbt" id="' +htmlEncodeJQ(m2[0]) + '" type="button">' + join + '</span ></div>');
           })
         }
       })
@@ -278,6 +278,9 @@
         }
       })
 
+    }
+    function htmlEncodeJQ(str) {
+      return $('<span/>').text(str).html();
     }
   </script>
 </body>
