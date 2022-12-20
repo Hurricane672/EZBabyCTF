@@ -1,4 +1,4 @@
-FROM php:8.0.10-apache
+FROM php:8.2.1RC1-apache
 
 
 RUN docker-php-ext-install mysqli; \
